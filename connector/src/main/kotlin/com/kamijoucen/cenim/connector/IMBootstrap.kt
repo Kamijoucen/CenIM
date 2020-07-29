@@ -1,4 +1,5 @@
-package com.kamijoucen.cenim
+package com.kamijoucen.cenim.connector
+
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
