@@ -1,12 +1,8 @@
 package com.kamijoucen.cenim.connector
 
+fun start(config: IMServerConfig): Boolean {
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
 
-@SpringBootApplication
-class CenImApplication
 
-fun main(args: Array<String>) {
-    runApplication<CenImApplication>(*args)
+    return false
 }

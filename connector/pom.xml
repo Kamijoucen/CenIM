@@ -11,5 +11,12 @@
 
     <artifactId>connector</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.kamijoucen.cenim</groupId>
+            <artifactId>commons</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

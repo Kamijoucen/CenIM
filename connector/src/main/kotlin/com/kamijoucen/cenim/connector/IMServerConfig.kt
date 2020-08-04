@@ -1,11 +1,10 @@
 package com.kamijoucen.cenim.connector
 
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.stereotype.Component
+data class IMServerConfig(
+        val port: Int
+)
 
-@Component
-class IMServerConfig {
-
-//    @Value("#{}")
-    var port: Int? = null
+fun parseConfig(): IMServerConfig {
+    val config = IMServerConfig(8080)
+    return config
 }
