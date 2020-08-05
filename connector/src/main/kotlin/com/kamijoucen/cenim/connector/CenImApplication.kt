@@ -18,4 +18,5 @@ fun main(args: Array<String>) {
     // 启动服务器
     val success = start(parseConfig)
 
+    println(parseConfig)
 }
