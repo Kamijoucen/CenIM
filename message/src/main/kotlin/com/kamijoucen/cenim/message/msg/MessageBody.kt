@@ -1,4 +1,5 @@
 package com.kamijoucen.cenim.message.msg
 
-class MessageBody {
+open class MessageBody {
+    var length: Int = 0
 }
