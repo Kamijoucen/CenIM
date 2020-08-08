@@ -8,6 +8,7 @@ class MessageProtocolDecoder : MessageToMessageDecoder<ByteBuf>() {
 
     override fun decode(context: ChannelHandlerContext?, byteBuf: ByteBuf?, out: List<Any>?) {
 
-        TODO("Not yet implemented")
+
+
     }
 }
