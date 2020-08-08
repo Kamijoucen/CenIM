@@ -1,5 +1,6 @@
 package com.kamijoucen.cenim.connector
 
+import com.kamijoucen.cenim.common.util.SpringUtil
 import com.kamijoucen.cenim.connector.handler.MessageHandler
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
@@ -29,8 +30,7 @@ fun start(config: ConnectorConfig): Boolean {
                             .addLast("frameEncode", MessageFrameEncoder())
                             .addLast("protocolDecode", MessageProtocolDecoder())
                             .addLast("protocolEncode", MessageProtocolEncoder())
-                            .addLast("messageHandler", MessageHandler())
-
+                            .addLast("messageHandler", SpringUtil.getBean(MessageHandler::class.java))
                 }
             })
 

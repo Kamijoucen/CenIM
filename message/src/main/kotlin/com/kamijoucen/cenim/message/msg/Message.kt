@@ -2,19 +2,26 @@ package com.kamijoucen.cenim.message.msg
 
 import io.netty.buffer.ByteBuf
 
-abstract class Message<BODY : MessageBody>(val header: MessageHeader, val body: MessageBody) {
+abstract class Message<BODY : MessageBody> {
 
-    fun encode(buf: ByteBuf) {
+    lateinit var header: MessageHeader
+    lateinit var body: MessageBody
+
+    abstract fun encode(buf: ByteBuf)
+
+    abstract fun decode(buf: ByteBuf)
+
+    fun defaultEncode(buf: ByteBuf) {
         buf.writeInt(this.header.version)
-        buf.writeBytes(this.header.msgId.toByteArray())
-//        buf.writeBytes(this.header.type.toString().toByteArray())
-        buf.writeInt(this.body.length)
+        buf.writeLong(this.header.fromId)
+        buf.writeLong(this.header.toId)
         buf.writeBytes(this.body.toString().toByteArray())
-        // TODO: 2020/8/7 临时实现
     }
 
-    fun decode(buf: ByteBuf) {
-        TODO()
+    fun defaultDecode(buf: ByteBuf) {
+        this.header.version = buf.readInt()
+        this.header.fromId = buf.readLong()
+        this.header.toId = buf.readLong()
     }
 
 }

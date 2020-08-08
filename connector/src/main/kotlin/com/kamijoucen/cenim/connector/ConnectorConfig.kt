@@ -1,10 +1,10 @@
 package com.kamijoucen.cenim.connector
 
-data class ConnectorConfig(
-        val port: Int
-)
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.stereotype.Component
 
-fun parseConfig(): ConnectorConfig {
-    val config = ConnectorConfig(8080)
-    return config
+@Component
+@ConfigurationProperties("app.connector")
+class ConnectorConfig {
+    var port: Int = -1
 }

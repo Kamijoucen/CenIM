@@ -1,0 +1,3 @@
+app:
+  connector:
+    port: 8080
