@@ -7,4 +7,5 @@ import org.springframework.stereotype.Component
 @ConfigurationProperties("app.connector")
 class ConnectorConfig {
     var port: Int = -1
+    var transfer: ArrayList<String> = ArrayList()
 }

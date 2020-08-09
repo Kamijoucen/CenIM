@@ -1,3 +1,5 @@
 app:
   connector:
     port: 8080
+    transfer:
+      - "127.0.0.1:8080"
