@@ -1,14 +1,21 @@
 package com.kamijoucen.cenim.message.codec
 
+import com.kamijoucen.cenim.message.msg.RequestMessage
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
-import io.netty.handler.codec.MessageToMessageDecoder
 import io.netty.handler.codec.MessageToMessageEncoder
 
-class MessageProtocolEncoder : MessageToMessageEncoder<Any>() {
-    override fun encode(p0: ChannelHandlerContext?, p1: Any?, p2: MutableList<Any>?) {
+class MessageProtocolEncoder : MessageToMessageEncoder<RequestMessage>() {
 
-        TODO("Not yet implemented")
+    override fun encode(context: ChannelHandlerContext?, msg: RequestMessage?, out: MutableList<Any>?) {
+        if (context == null || msg == null || out == null) {
+            return
+        }
+
+        val buffer = context.alloc().buffer()
+        msg.encode(buffer)
+
+        out.add(buffer)
     }
 
 }

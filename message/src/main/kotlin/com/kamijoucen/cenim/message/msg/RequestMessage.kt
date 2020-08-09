@@ -1,5 +1,12 @@
 package com.kamijoucen.cenim.message.msg
 
-class RequestMessage(header: MessageHeader, body: MessageBody)
-    : Message<Operation>(header, body) {
+class RequestMessage : Message<Operation>() {
+
+
+    override fun getMessageBodyOperationClass(type: Int): Class<out Operation> {
+        return RequestOperationType.fromType(type).opClass
+
+    }
+
+
 }

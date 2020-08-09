@@ -1,9 +1,9 @@
 package com.kamijoucen.cenim.message.msg
 
 class MessageHeader {
-    var version: Int = 0
-    var fromId: Long = 0
-    var toId: Long = 0
-    var msgId: Long = 0
-//    var type: MessageType
+    var version: Int = -1
+    var type: Int = -1
+    var fromId: Long = -1
+    var toId: Long = -1
+    var msgId: Long = -1
 }
