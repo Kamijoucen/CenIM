@@ -1,5 +1,5 @@
 app:
   connector:
-    port: 8080
+    port: 5238
     transfer:
       - "127.0.0.1:8080"

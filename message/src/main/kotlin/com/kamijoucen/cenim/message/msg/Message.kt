@@ -1,13 +1,11 @@
 package com.kamijoucen.cenim.message.msg
 
 import com.kamijoucen.cenim.common.util.JsonUtil
+import com.kamijoucen.cenim.message.msg.string.StringOperation
 import io.netty.buffer.ByteBuf
 import java.nio.charset.StandardCharsets
 
-abstract class Message<BODY : MessageBody> {
-
-    lateinit var header: MessageHeader
-    lateinit var body: MessageBody
+abstract class Message<BODY : MessageBody>(var header: MessageHeader, var body: BODY?) {
 
 
     abstract fun getMessageBodyOperationClass(type: Int): Class<out BODY>
@@ -17,7 +15,7 @@ abstract class Message<BODY : MessageBody> {
         buf.writeInt(this.header.type)
         buf.writeLong(this.header.fromId)
         buf.writeLong(this.header.toId)
-        buf.writeBytes(this.body.toString().toByteArray())
+        buf.writeBytes(JsonUtil.toJson(this.body?:StringOperation()).toByteArray())
         return this
     }
 

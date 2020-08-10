@@ -5,11 +5,11 @@ import com.kamijoucen.cenim.message.msg.OperationResult
 
 class StringOperation : Operation() {
 
-    var content: String? = null
+    var content: String? = ""
 
     override fun execute(): OperationResult {
         val result = StringOperationResult()
-        result.content = "这是测试文本"
+        result.content = this.content ?: ""
         return result
     }
 }

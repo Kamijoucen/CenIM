@@ -6,7 +6,6 @@ import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
 import com.kamijoucen.cenim.message.codec.MessageProtocolDecoder
 import com.kamijoucen.cenim.message.codec.MessageProtocolEncoder
-import com.kamijoucen.cenim.message.msg.MessageHeader
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.EventLoopGroup
