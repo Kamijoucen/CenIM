@@ -4,15 +4,15 @@ import com.kamijoucen.cenim.common.util.JsonUtil
 import io.netty.buffer.ByteBuf
 import java.nio.charset.StandardCharsets
 
-class RequestMessage(messageHeader: MessageHeader, messageBody: MessageBody)
-    : Message(messageHeader, messageBody) {
+class RequestMessage(header: MessageHeader, body: MessageBody)
+    : Message(header, body) {
 
     companion object {}
 
     override val type: MessageType = MessageType.REQUEST
 }
 
-fun RequestMessage.Companion.decode(buf: ByteBuf): Message {
+fun RequestMessage.Companion.decode(buf: ByteBuf): RequestMessage {
     val version = buf.readInt()
     val type = buf.readInt()
     val fromId = buf.readLong()
