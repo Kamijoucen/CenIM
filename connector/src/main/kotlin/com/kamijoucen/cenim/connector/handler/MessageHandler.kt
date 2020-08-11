@@ -13,8 +13,8 @@ class MessageHandler : SimpleChannelInboundHandler<RequestMessage>() {
             return
         }
 
-        val result = msg.body?.execute()
-        val property = result?.getProperty()
+        val result = msg.body.execute()
+        val property = result.getProperty()
         println("---------------------MSG---------------------")
         println(property)
 

@@ -7,8 +7,10 @@ import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
 import com.kamijoucen.cenim.message.codec.MessageProtocolDecoder
 import com.kamijoucen.cenim.message.codec.MessageProtocolEncoder
+import com.kamijoucen.cenim.message.msg.MessageHeader
 import com.kamijoucen.cenim.message.msg.RequestMessage
-import com.kamijoucen.cenim.message.msg.string.StringOperation
+import com.kamijoucen.cenim.message.msg.RequestMessageBodyType
+import com.kamijoucen.cenim.message.msg.string.StringMessageBody
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelFuture
 import io.netty.channel.ChannelInitializer
@@ -56,10 +58,11 @@ class ConnectorTest {
 
         channelFuture.sync()
 
-        val operation = StringOperation()
+        val operation = StringMessageBody()
         operation.content = "lisicena"
 
-        val requestMessage = RequestMessage(1, 11, 22, operation)
+        val header = MessageHeader(1, RequestMessageBodyType.STRING_CHAT.type, 11, 22, 33)
+        val requestMessage = RequestMessage(header, operation)
 
         channelFuture.channel().writeAndFlush(requestMessage)
 

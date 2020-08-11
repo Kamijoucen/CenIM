@@ -1,8 +1,8 @@
 package com.kamijoucen.cenim.message.msg.string
 
-import com.kamijoucen.cenim.message.msg.OperationResult
+import com.kamijoucen.cenim.message.msg.MessageResult
 
-class StringOperationResult : OperationResult() {
+class StringMessageResult : MessageResult() {
     var content: String = ""
 
     override fun getProperty(key: String): String {
