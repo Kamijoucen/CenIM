@@ -9,7 +9,7 @@ import com.kamijoucen.cenim.message.codec.MessageProtocolDecoder
 import com.kamijoucen.cenim.message.codec.MessageProtocolEncoder
 import com.kamijoucen.cenim.message.msg.MessageHeader
 import com.kamijoucen.cenim.message.msg.RequestMessage
-import com.kamijoucen.cenim.message.msg.RequestMessageBodyType
+import com.kamijoucen.cenim.message.msg.RequestBodyType
 import com.kamijoucen.cenim.message.msg.string.StringMessageBody
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelFuture
@@ -61,7 +61,7 @@ class ConnectorTest {
         val operation = StringMessageBody()
         operation.content = "lisicena"
 
-        val header = MessageHeader(1, RequestMessageBodyType.STRING_CHAT.type, 11, 22, 33)
+        val header = MessageHeader(1, RequestBodyType.STRING_CHAT.type, 11, 22, 33)
         val requestMessage = RequestMessage(header, operation)
 
         channelFuture.channel().writeAndFlush(requestMessage)

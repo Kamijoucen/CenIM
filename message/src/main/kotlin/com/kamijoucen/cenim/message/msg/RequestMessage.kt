@@ -20,7 +20,7 @@ fun RequestMessage.Companion.decode(buf: ByteBuf): RequestMessage {
     val msgId = buf.readLong()
 
     val header = MessageHeader(version, type, fromId, toId, msgId)
-    val body = JsonUtil.fromJson(buf.toString(StandardCharsets.UTF_8), RequestMessage.getMessageBodyClass(type))
+    val body = JsonUtil.fromJson(buf.toString(StandardCharsets.UTF_8), RequestMessage.getBodyClass(type))
     return RequestMessage(header, body)
 }
 
@@ -34,6 +34,6 @@ fun RequestMessage.Companion.encode(buf: ByteBuf, msg: RequestMessage) {
     buf.writeBytes(JsonUtil.toJson(msg.body).toByteArray())
 }
 
-fun RequestMessage.Companion.getMessageBodyClass(type: Int): Class<out MessageBody> {
-    return RequestMessageBodyType.fromType(type).opClass
+fun RequestMessage.Companion.getBodyClass(type: Int): Class<out MessageBody> {
+    return RequestBodyType.fromType(type).opClass
 }
