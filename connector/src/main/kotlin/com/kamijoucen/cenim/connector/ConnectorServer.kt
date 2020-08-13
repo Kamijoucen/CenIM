@@ -1,11 +1,11 @@
 package com.kamijoucen.cenim.connector
 
-import com.kamijoucen.cenim.common.util.SpringUtil
+import com.kamijoucen.cenim.common.util.ContextUtil
 import com.kamijoucen.cenim.connector.handler.MessageHandler
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
-import com.kamijoucen.cenim.message.codec.MessageProtocolDecoder
-import com.kamijoucen.cenim.message.codec.MessageProtocolEncoder
+import com.kamijoucen.cenim.message.codec.server.ServerMessageProtocolDecoder
+import com.kamijoucen.cenim.message.codec.server.ServerMessageProtocolEncoder
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.EventLoopGroup
@@ -27,9 +27,9 @@ fun startConnectorServer(config: ConnectorConfig): Boolean {
                     val pipeline = channel.pipeline()
                     pipeline.addLast("frameDecode", MessageFrameDecoder())
                             .addLast("frameEncode", MessageFrameEncoder())
-                            .addLast("protocolDecode", MessageProtocolDecoder())
-                            .addLast("protocolEncode", MessageProtocolEncoder())
-                            .addLast("messageHandler", SpringUtil.getBean(MessageHandler::class.java))
+                            .addLast("protocolDecode", ServerMessageProtocolDecoder())
+                            .addLast("protocolEncode", ServerMessageProtocolEncoder())
+                            .addLast("messageHandler", ContextUtil.getBean(MessageHandler::class.java))
                 }
             })
 

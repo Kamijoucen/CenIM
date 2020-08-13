@@ -5,10 +5,10 @@ import org.springframework.context.ApplicationContextAware
 import org.springframework.stereotype.Component
 
 @Component
-class SpringUtil : ApplicationContextAware {
+class ContextUtil : ApplicationContextAware {
 
     override fun setApplicationContext(context: ApplicationContext) {
-        SpringUtil.context = context
+        ContextUtil.context = context
     }
 
     companion object {

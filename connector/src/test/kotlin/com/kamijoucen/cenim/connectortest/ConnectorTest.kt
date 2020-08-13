@@ -1,12 +1,12 @@
 package com.kamijoucen.cenim.connectortest
 
-import com.kamijoucen.cenim.common.util.SpringUtil
+import com.kamijoucen.cenim.common.util.ContextUtil
 import com.kamijoucen.cenim.connector.CenImApplication
 import com.kamijoucen.cenim.connector.ConnectorConfig
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
-import com.kamijoucen.cenim.message.codec.MessageProtocolDecoder
-import com.kamijoucen.cenim.message.codec.MessageProtocolEncoder
+import com.kamijoucen.cenim.message.codec.client.ClientMessageProtocolDecoder
+import com.kamijoucen.cenim.message.codec.client.ClientMessageProtocolEncoder
 import com.kamijoucen.cenim.message.msg.MessageHeader
 import com.kamijoucen.cenim.message.msg.RequestMessage
 import com.kamijoucen.cenim.message.msg.RequestBodyType
@@ -29,7 +29,7 @@ class ConnectorTest {
 
     @Test
     fun test() {
-        var bean = SpringUtil.getBean(ConnectorConfig::class.java)
+        var bean = ContextUtil.getBean(ConnectorConfig::class.java)
         println(bean.transfer)
     }
 
@@ -39,7 +39,7 @@ class ConnectorTest {
         bootstrap.channel(NioSocketChannel::class.java)
 
         val group = NioEventLoopGroup()
-        bootstrap.group(group);
+        bootstrap.group(group)
 
         bootstrap.handler(object : ChannelInitializer<NioSocketChannel?>() {
             @Throws(Exception::class)
@@ -50,16 +50,15 @@ class ConnectorTest {
                 val pipeline: ChannelPipeline = ch.pipeline()
                 pipeline.addLast(MessageFrameDecoder())
                 pipeline.addLast(MessageFrameEncoder())
-                pipeline.addLast(MessageProtocolDecoder())
-                pipeline.addLast(MessageProtocolEncoder())
+                pipeline.addLast(ClientMessageProtocolDecoder())
+                pipeline.addLast(ClientMessageProtocolEncoder())
             }
         })
         val channelFuture: ChannelFuture = bootstrap.connect("127.0.0.1", 5238)
 
         channelFuture.sync()
 
-        val operation = StringMessageBody()
-        operation.content = "lisicena"
+        val operation = StringMessageBody("lisicena")
 
         val header = MessageHeader(1, RequestBodyType.STRING_CHAT.type, 11, 22, 33)
         val requestMessage = RequestMessage(header, operation)

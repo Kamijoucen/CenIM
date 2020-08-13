@@ -4,13 +4,10 @@ import com.kamijoucen.cenim.message.msg.MessageResult
 
 class StringMessageResult : MessageResult() {
 
-    var content = ""
+    var text = ""
 
-    override fun getProperty(key: String): String {
-        return ""
-    }
+    override fun getProperty(key: String): String = ""
 
-    override fun toString(): String {
-        return content
-    }
+    override fun getContent(): String = text
+
 }

@@ -4,4 +4,6 @@ abstract class MessageResult {
 
     abstract fun getProperty(key: String): String
 
+    abstract fun getContent() : String
+
 }
