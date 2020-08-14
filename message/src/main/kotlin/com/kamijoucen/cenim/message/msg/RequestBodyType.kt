@@ -1,5 +1,6 @@
 package com.kamijoucen.cenim.message.msg
 
+import com.kamijoucen.cenim.message.msg.custom.CustomMessageBody
 import com.kamijoucen.cenim.message.msg.string.StringMessageBody
 import com.kamijoucen.cenim.message.msg.string.StringMessageResult
 import java.util.function.Predicate
@@ -8,7 +9,8 @@ enum class RequestBodyType(val type: Int,
                            val opClass: Class<out MessageBody>,
                            val opResultClass: Class<out MessageResult>) {
 
-    STRING_CHAT(1, StringMessageBody::class.java, StringMessageResult::class.java);
+    STRING_MSG(1, StringMessageBody::class.java, StringMessageResult::class.java),
+    CUSTOM_MSG(2, CustomMessageBody::class.java, StringMessageResult::class.java);
 
     companion object {}
 
@@ -32,5 +34,5 @@ private fun RequestBodyType.Companion.getMessageType(predicate: Predicate<Reques
             return it
         }
     }
-    return RequestBodyType.STRING_CHAT
+    return RequestBodyType.STRING_MSG
 }

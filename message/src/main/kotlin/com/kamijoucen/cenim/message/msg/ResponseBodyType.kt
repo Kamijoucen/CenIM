@@ -1,14 +1,17 @@
 package com.kamijoucen.cenim.message.msg
 
+import com.kamijoucen.cenim.message.msg.custom.CustomMessageBody
 import com.kamijoucen.cenim.message.msg.string.StringMessageBody
 import com.kamijoucen.cenim.message.msg.string.StringMessageResult
 import java.util.function.Predicate
 
 enum class ResponseBodyType(val type: Int,
-                           val opClass: Class<out MessageBody>,
-                           val opResultClass: Class<out MessageResult>) {
+                            val opClass: Class<out MessageBody>,
+                            val opResultClass: Class<out MessageResult>) {
 
-    STRING_CHAT(1, StringMessageBody::class.java, StringMessageResult::class.java);
+    STRING_MSG(1, StringMessageBody::class.java, StringMessageResult::class.java),
+    CUSTOM_MSG(2, CustomMessageBody::class.java, StringMessageResult::class.java);
+//    ACT_CHAT(2, )
 
     companion object {}
 
@@ -32,5 +35,5 @@ private fun ResponseBodyType.Companion.getMessageType(predicate: Predicate<Respo
             return it
         }
     }
-    return ResponseBodyType.STRING_CHAT
+    return ResponseBodyType.STRING_MSG
 }

@@ -1,0 +1,5 @@
+app:
+  connector:
+    port: 5238
+    business:
+      - "127.0.0.1:5240"

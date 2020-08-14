@@ -10,6 +10,7 @@ import com.kamijoucen.cenim.message.codec.client.ClientMessageProtocolEncoder
 import com.kamijoucen.cenim.message.msg.MessageHeader
 import com.kamijoucen.cenim.message.msg.RequestMessage
 import com.kamijoucen.cenim.message.msg.RequestBodyType
+import com.kamijoucen.cenim.message.msg.custom.CustomMessageBody
 import com.kamijoucen.cenim.message.msg.string.StringMessageBody
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelFuture
@@ -59,11 +60,19 @@ class ConnectorTest {
         channelFuture.sync()
 
         val operation = StringMessageBody("lisicena")
-
-        val header = MessageHeader(1, RequestBodyType.STRING_CHAT.type, 11, 22, 33)
+        val header = MessageHeader(1, RequestBodyType.STRING_MSG.type, 11, 22, 33)
         val requestMessage = RequestMessage(header, operation)
-
         channelFuture.channel().writeAndFlush(requestMessage)
+
+
+        val header2 = MessageHeader(1, RequestBodyType.CUSTOM_MSG.type, 11, 22, 33)
+        val cusBody = CustomMessageBody().also {
+            it.addParam("lg", "贾静")
+            it.addParam("lp", "李思岑")
+            it.addParam("test", "{\"lp\":\"李思岑\",\"lg\":\"贾静\"}")
+        }
+        val requestMessage2 = RequestMessage(header2, cusBody)
+        channelFuture.channel().writeAndFlush(requestMessage2)
 
         channelFuture.channel().closeFuture().sync()
 

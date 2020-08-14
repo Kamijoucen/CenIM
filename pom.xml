@@ -8,6 +8,7 @@
         <module>connector</module>
         <module>transfer</module>
         <module>message</module>
+        <module>business</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -11,5 +11,22 @@
 
     <artifactId>transfer</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.kamijoucen.cenim</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamijoucen.cenim</groupId>
+            <artifactId>message</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.51.Final</version>
+        </dependency>
+    </dependencies>
 
 </project>
