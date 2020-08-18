@@ -15,8 +15,8 @@ import io.netty.channel.socket.nio.NioSocketChannel
 
 fun startConnectorServer(config: ConnectorConfig): Boolean {
 
-    val bossGroup: EventLoopGroup = NioEventLoopGroup()
-    val workGroup: EventLoopGroup = NioEventLoopGroup()
+    val bossGroup = NioEventLoopGroup()
+    val workGroup = NioEventLoopGroup()
 
     val bootstrap = ServerBootstrap()
             .group(bossGroup, workGroup)

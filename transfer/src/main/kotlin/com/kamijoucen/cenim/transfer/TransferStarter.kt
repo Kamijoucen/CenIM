@@ -7,11 +7,11 @@ import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
 @ComponentScan(basePackages = ["com.kamijoucen.cenim"])
-class CenImApplication
+class CenImTransferApp
 
 
 fun main(args: Array<String>) {
-    runApplication<CenImApplication>(*args)
+    runApplication<CenImTransferApp>(*args)
     // 加载配置
     val config = ContextUtil.getBean(TransferConfig::class.java)
     // 链接 transfer 层

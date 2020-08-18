@@ -1,7 +1,7 @@
 package com.kamijoucen.cenim.connectortest
 
 import com.kamijoucen.cenim.common.util.ContextUtil
-import com.kamijoucen.cenim.connector.CenImApplication
+import com.kamijoucen.cenim.connector.CenImConnectorApp
 import com.kamijoucen.cenim.connector.ConnectorConfig
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
@@ -24,7 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
-@SpringBootTest(classes = [CenImApplication::class])
+@SpringBootTest(classes = [CenImConnectorApp::class])
 class ConnectorTest {
 
 

@@ -1,8 +1,6 @@
 package com.kamijoucen.cenim.message.codec.client
 
-import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.message.msg.RequestMessage
-import com.kamijoucen.cenim.message.msg.ResponseMessage
 import com.kamijoucen.cenim.message.msg.encode
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageEncoder
