@@ -1,5 +1,6 @@
 package com.kamijoucen.cenim.connector.handler
 
+import com.kamijoucen.cenim.connector.manager.ConnectorManager
 import com.kamijoucen.cenim.message.msg.RequestMessage
 import com.kamijoucen.cenim.message.msg.ResponseMessage
 import com.kamijoucen.cenim.message.msg.string.StringMessageBody
@@ -21,4 +22,16 @@ class MessageHandler : SimpleChannelInboundHandler<RequestMessage>() {
         context.writeAndFlush(responseMessage)
     }
 
+    override fun channelActive(ctx: ChannelHandlerContext?) {
+        super.channelActive(ctx)
+        if (ctx != null) {
+            ConnectorManager.contextManager.put(ctx)
+        }
+        TODO("LOG...")
+    }
+
+    override fun channelInactive(ctx: ChannelHandlerContext?) {
+        super.channelInactive(ctx)
+        TODO("reconnect...")
+    }
 }

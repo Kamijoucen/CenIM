@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
     // 加载配置
     val config = ContextUtil.getBean(ConnectorConfig::class.java)
     // 链接 transfer 层
-    var clientSuccess = startConnectorClient(config)
+//    var clientSuccess = startConnectorClient(config)
     // 启动服务器
     val serverSuccess = startConnectorServer(config)
     println(config)
