@@ -1,11 +1,10 @@
-package com.kamijoucen.cenim.message.msg.string
+package com.kamijoucen.cenim.message.msg.body
 
 import com.kamijoucen.cenim.message.msg.MessageBody
-import com.kamijoucen.cenim.message.msg.MessageResult
 
 class StringMessageBody(var content: String) : MessageBody() {
 
-    override fun execute(): MessageResult {
+    override fun execute(): StringMessageResult {
         val result = StringMessageResult()
         result.text = this.content
         return result

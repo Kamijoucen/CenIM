@@ -1,15 +1,14 @@
 package com.kamijoucen.cenim.connector.handler
 
-import com.kamijoucen.cenim.connector.manager.ConnectorManager
 import com.kamijoucen.cenim.message.msg.RequestMessage
 import com.kamijoucen.cenim.message.msg.ResponseMessage
-import com.kamijoucen.cenim.message.msg.string.StringMessageBody
+import com.kamijoucen.cenim.message.msg.body.StringMessageBody
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import org.springframework.stereotype.Component
 
 @Component
-class MessageHandler : SimpleChannelInboundHandler<RequestMessage>() {
+class ClientToCollectorHandler : SimpleChannelInboundHandler<RequestMessage>() {
 
     override fun channelRead0(context: ChannelHandlerContext?, msg: RequestMessage?) {
         if (context == null || msg == null) {
@@ -24,9 +23,6 @@ class MessageHandler : SimpleChannelInboundHandler<RequestMessage>() {
 
     override fun channelActive(ctx: ChannelHandlerContext?) {
         super.channelActive(ctx)
-        if (ctx != null) {
-            ConnectorManager.contextManager.put(ctx)
-        }
         TODO("LOG...")
     }
 

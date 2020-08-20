@@ -1,14 +1,13 @@
 package com.kamijoucen.cenim.connector
 
 import com.kamijoucen.cenim.common.util.ContextUtil
-import com.kamijoucen.cenim.connector.handler.MessageHandler
+import com.kamijoucen.cenim.connector.handler.ClientToCollectorHandler
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
 import com.kamijoucen.cenim.message.codec.server.ServerMessageProtocolDecoder
 import com.kamijoucen.cenim.message.codec.server.ServerMessageProtocolEncoder
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelInitializer
-import io.netty.channel.EventLoopGroup
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
@@ -29,7 +28,7 @@ fun startConnectorServer(config: ConnectorConfig): Boolean {
                             .addLast("frameEncode", MessageFrameEncoder())
                             .addLast("protocolDecode", ServerMessageProtocolDecoder())
                             .addLast("protocolEncode", ServerMessageProtocolEncoder())
-                            .addLast("messageHandler", ContextUtil.getBean(MessageHandler::class.java))
+                            .addLast("messageHandler", ContextUtil.getBean(ClientToCollectorHandler::class.java))
                 }
             })
 

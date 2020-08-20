@@ -1,4 +1,4 @@
-package com.kamijoucen.cenim.message.msg.custom
+package com.kamijoucen.cenim.message.msg.body
 
 import com.kamijoucen.cenim.common.util.JsonUtil
 import com.kamijoucen.cenim.message.msg.MessageResult

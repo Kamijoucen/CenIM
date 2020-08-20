@@ -1,8 +1,8 @@
 package com.kamijoucen.cenim.message.msg
 
-import com.kamijoucen.cenim.message.msg.custom.CustomMessageBody
-import com.kamijoucen.cenim.message.msg.string.StringMessageBody
-import com.kamijoucen.cenim.message.msg.string.StringMessageResult
+import com.kamijoucen.cenim.message.msg.body.CustomMessageBody
+import com.kamijoucen.cenim.message.msg.body.StringMessageBody
+import com.kamijoucen.cenim.message.msg.body.StringMessageResult
 import java.util.function.Predicate
 
 enum class RequestBodyType(val type: Int,
@@ -10,7 +10,9 @@ enum class RequestBodyType(val type: Int,
                            val opResultClass: Class<out MessageResult>) {
 
     STRING_MSG(1, StringMessageBody::class.java, StringMessageResult::class.java),
-    CUSTOM_MSG(2, CustomMessageBody::class.java, StringMessageResult::class.java);
+    CUSTOM_MSG(2, CustomMessageBody::class.java, StringMessageResult::class.java),
+//    LOGIN_MSG(3, )
+    ;
 
     companion object {}
 

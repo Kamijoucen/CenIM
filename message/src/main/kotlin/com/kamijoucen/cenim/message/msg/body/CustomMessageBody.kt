@@ -1,13 +1,12 @@
-package com.kamijoucen.cenim.message.msg.custom
+package com.kamijoucen.cenim.message.msg.body
 
 import com.kamijoucen.cenim.message.msg.MessageBody
-import com.kamijoucen.cenim.message.msg.MessageResult
 
 class CustomMessageBody : MessageBody() {
 
     private val parameters = HashMap<String, String>()
 
-    override fun execute(): MessageResult {
+    override fun execute(): CustomMessageResult {
         return CustomMessageResult(HashMap<String, String>(parameters.size)
                 .also {
                     it.putAll(parameters)

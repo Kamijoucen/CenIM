@@ -1,8 +1,8 @@
 package com.kamijoucen.cenim.message.msg
 
-import com.kamijoucen.cenim.message.msg.custom.CustomMessageBody
-import com.kamijoucen.cenim.message.msg.string.StringMessageBody
-import com.kamijoucen.cenim.message.msg.string.StringMessageResult
+import com.kamijoucen.cenim.message.msg.body.CustomMessageBody
+import com.kamijoucen.cenim.message.msg.body.StringMessageBody
+import com.kamijoucen.cenim.message.msg.body.StringMessageResult
 import java.util.function.Predicate
 
 enum class ResponseBodyType(val type: Int,

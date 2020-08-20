@@ -10,8 +10,8 @@ import com.kamijoucen.cenim.message.codec.client.ClientMessageProtocolEncoder
 import com.kamijoucen.cenim.message.msg.MessageHeader
 import com.kamijoucen.cenim.message.msg.RequestMessage
 import com.kamijoucen.cenim.message.msg.RequestBodyType
-import com.kamijoucen.cenim.message.msg.custom.CustomMessageBody
-import com.kamijoucen.cenim.message.msg.string.StringMessageBody
+import com.kamijoucen.cenim.message.msg.body.CustomMessageBody
+import com.kamijoucen.cenim.message.msg.body.StringMessageBody
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelFuture
 import io.netty.channel.ChannelInitializer
