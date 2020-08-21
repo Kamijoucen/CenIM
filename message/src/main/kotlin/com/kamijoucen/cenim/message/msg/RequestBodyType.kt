@@ -6,21 +6,16 @@ import com.kamijoucen.cenim.message.msg.body.StringMessageBody
 import com.kamijoucen.cenim.message.msg.body.StringMessageResult
 import com.kamijoucen.cenim.message.msg.body.request.OnlineMessageBody
 import com.kamijoucen.cenim.message.msg.body.request.OnlineMessageResult
-import com.kamijoucen.cenim.message.msg.handler.MessageHandlerFactory
-import com.kamijoucen.cenim.message.msg.handler.customMsg
-import com.kamijoucen.cenim.message.msg.handler.onlineMsg
-import com.kamijoucen.cenim.message.msg.handler.stringMsg
-import io.netty.channel.ChannelHandlerContext
+
 import java.util.function.Predicate
 
 enum class RequestBodyType(val type: Int,
                            val opClass: Class<out MessageBody>,
-                           val opResultClass: Class<out MessageResult>,
-                           val consumer: IMConsumer<out MessageBody, ChannelHandlerContext>) {
+                           val opResultClass: Class<out MessageResult>) {
 
-    STRING_MSG(1, StringMessageBody::class.java, StringMessageResult::class.java, MessageHandlerFactory.stringMsg()),
-    CUSTOM_MSG(2, CustomMessageBody::class.java, StringMessageResult::class.java, MessageHandlerFactory.customMsg()),
-    ONLINE_MSG(3, OnlineMessageBody::class.java, OnlineMessageResult::class.java, MessageHandlerFactory.onlineMsg())
+    STRING_MSG(1, StringMessageBody::class.java, StringMessageResult::class.java),
+    CUSTOM_MSG(2, CustomMessageBody::class.java, StringMessageResult::class.java),
+    ONLINE_MSG(3, OnlineMessageBody::class.java, OnlineMessageResult::class.java)
     ;
 
     companion object {}

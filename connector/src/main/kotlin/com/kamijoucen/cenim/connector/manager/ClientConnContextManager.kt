@@ -7,11 +7,13 @@ import java.io.Serializable
 @Component
 class ClientConnContextManager {
 
-    private val ctxMap = HashMap<Serializable, IMConn>()
+    private val connMap = HashMap<Serializable, IMConn>()
 
-    fun put(conn: IMConn) = ctxMap.put(conn.getId(), conn)!!
+    fun put(conn: IMConn) = connMap.put(conn.getId(), conn)!!
 
-    fun get(id: Serializable) = ctxMap[id]
+    fun get(id: Serializable) = connMap[id]
+
+    fun remove(id: Serializable) = connMap.remove(id)!!
 
 
 }
