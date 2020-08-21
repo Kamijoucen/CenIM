@@ -2,6 +2,8 @@ package com.kamijoucen.cenim.message.msg.body
 
 import com.kamijoucen.cenim.message.msg.MessageBody
 
+typealias CsmMsgBody = CustomMessageBody
+
 class CustomMessageBody : MessageBody() {
 
     private val parameters = HashMap<String, String>()
