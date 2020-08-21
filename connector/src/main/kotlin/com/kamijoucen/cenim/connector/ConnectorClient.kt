@@ -1,5 +1,7 @@
 package com.kamijoucen.cenim.connector
 
+import com.kamijoucen.cenim.common.util.ContextUtil
+import com.kamijoucen.cenim.connector.handler.ConnectorToTransferHandler
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
 import com.kamijoucen.cenim.message.codec.client.ClientMessageProtocolDecoder
@@ -37,8 +39,7 @@ private fun startClient(host: String, port: String) {
                 pipeline.addLast(MessageFrameEncoder())
                 pipeline.addLast(ClientMessageProtocolDecoder())
                 pipeline.addLast(ClientMessageProtocolEncoder())
-                pipeline.addLast()
-                TODO("这里需要处理client链接")
+                pipeline.addLast(ContextUtil.getBean(ConnectorToTransferHandler::class.java))
             }
         })
         val channelFuture = bootstrap.connect(host, Integer.parseInt(port))

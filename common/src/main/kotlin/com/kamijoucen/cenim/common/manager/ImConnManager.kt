@@ -6,15 +6,15 @@ import java.io.Serializable
 
 interface ImConnManager<C : IMConn> {
 
-    fun getConn(ctx: ChannelHandlerContext?): C
+    fun getConn(ctx: ChannelHandlerContext): C?
 
-    fun getConn(netId: Serializable?): C
+    fun getConn(netId: Serializable): C?
 
     fun addConn(conn: C)
 
-    fun removeConn(netId: Serializable?)
+    fun removeConn(netId: Serializable)
 
-    fun removeConn(ctx: ChannelHandlerContext?)
+    fun removeConn(ctx: ChannelHandlerContext)
 
     fun removeAllConn()
 

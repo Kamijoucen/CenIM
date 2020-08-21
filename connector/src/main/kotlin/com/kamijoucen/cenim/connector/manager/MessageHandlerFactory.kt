@@ -39,7 +39,7 @@ internal fun MessageHandlerFactory.Companion.onlineMsg(): IMConsumer<OlMsgBody, 
             // TODO: 2020/8/21 auth
             val connCtx = ContextUtil.getBean(ConnectorContext::class.java)
 
-            connCtx.clientConnContextManager.put(ClientToConnectorConn(ctx))
+            connCtx.clientConnContextManager.addConn(ClientToConnectorConn(ctx))
         }
     }
 }

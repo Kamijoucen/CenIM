@@ -16,10 +16,14 @@ class ClientMsgParseManager {
     init {
         RequestBodyType.values().forEach {
             when (it.opClass) {
-                StrMsgBody::class.java -> parseMap[it.opClass] = MsgHandleFac.stringMsg()
-                CsmMsgBody::class.java -> parseMap[it.opClass] = MsgHandleFac.customMsg()
-                OlMsgBody::class.java -> parseMap[it.opClass] = MsgHandleFac.onlineMsg()
-                else -> TODO("no handler type: ${it.type}")
+                StrMsgBody::class.java ->
+                    parseMap[it.opClass] = MsgHandleFac.stringMsg()
+                CsmMsgBody::class.java ->
+                    parseMap[it.opClass] = MsgHandleFac.customMsg()
+                OlMsgBody::class.java ->
+                    parseMap[it.opClass] = MsgHandleFac.onlineMsg()
+                else ->
+                    TODO("no handler type: ${it.type}")
             }
         }
     }
