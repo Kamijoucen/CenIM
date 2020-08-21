@@ -3,6 +3,7 @@ package com.kamijoucen.cenim.message.msg.handler
 import com.kamijoucen.cenim.common.domain.IMConsumer
 import com.kamijoucen.cenim.message.msg.body.CsmMsgBody
 import com.kamijoucen.cenim.message.msg.body.StrMsgBody
+import com.kamijoucen.cenim.message.msg.body.request.OlMsgBody
 import io.netty.channel.ChannelHandlerContext
 
 typealias ChCtx = ChannelHandlerContext
@@ -27,5 +28,13 @@ fun MessageHandlerFactory.Companion.customMsg(): IMConsumer<CsmMsgBody, ChCtx> {
             TODO("Not yet implemented")
         }
 
+    }
+}
+
+fun MessageHandlerFactory.Companion.onlineMsg(): IMConsumer<OlMsgBody, ChCtx> {
+    return object : IMConsumer<OlMsgBody, ChCtx> {
+        override fun accept(msg: OlMsgBody, ctx: ChCtx) {
+            TODO("Not yet implemented")
+        }
     }
 }
