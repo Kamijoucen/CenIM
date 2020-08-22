@@ -12,4 +12,7 @@ class ConnectorContext {
     @Autowired
     lateinit var clientMsgParseManager: ClientMsgParseManager
 
+    @Autowired
+    lateinit var transferConnContextManager: TransferConnContextManager
+
 }

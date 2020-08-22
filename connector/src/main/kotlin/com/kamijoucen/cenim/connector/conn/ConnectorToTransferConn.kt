@@ -1,10 +1,11 @@
-package com.kamijoucen.cenim.connector.domain
+package com.kamijoucen.cenim.connector.conn
 
 import com.kamijoucen.cenim.common.domain.IMConn
 import com.kamijoucen.cenim.connector.manager.ChCtx
 import java.io.Serializable
 
-class ClientToConnectorConn(private val ctx: ChCtx) : IMConn {
+
+class ConnectorToTransferConn(private val ctx: ChCtx) : IMConn {
 
     override fun getId(): Serializable {
         TODO("Not yet implemented")
