@@ -1,4 +1,4 @@
 package com.kamijoucen.cenim.message.msg
 
-class MessageHeader(val version: Int, val type: Int,
-                    val fromId: Long, val toId: Long, val msgId: Long)
+class MessageHeader(var version: Int, var type: Int,
+                    var fromId: Long, var toId: Long, var msgId: Long)

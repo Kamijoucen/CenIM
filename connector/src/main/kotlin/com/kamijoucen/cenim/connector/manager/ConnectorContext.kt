@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component
 class ConnectorContext {
 
     @Autowired
-    lateinit var clientConnContextManager: ClientConnContextManager
+    lateinit var clientToConnectorConnManager: ClientToConnectorConnManager
+
+    @Autowired
+    lateinit var connectorToTransferConnManager: ConnectorToTransferConnManager
 
     @Autowired
     lateinit var clientMsgParseManager: ClientMsgParseManager
-
-    @Autowired
-    lateinit var transferConnContextManager: TransferConnContextManager
 
 }

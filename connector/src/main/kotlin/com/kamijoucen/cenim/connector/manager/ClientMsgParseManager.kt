@@ -20,7 +20,7 @@ class ClientMsgParseManager {
                     requestParseMap[it.type] = ReqParseFac.stringMsg()
                 RequestBodyType.CUSTOM_MSG.type ->
                     requestParseMap[it.type] = ReqParseFac.customMsg()
-                RequestBodyType.CUSTOM_MSG.type ->
+                RequestBodyType.ONLINE_MSG.type ->
                     requestParseMap[it.type] = ReqParseFac.onlineMsg()
                 else ->
                     TODO("no handler type: ${it.type}")

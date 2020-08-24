@@ -16,19 +16,26 @@ class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>()
 
     override fun channelInactive(ctx: ChannelHandlerContext?) {
         super.channelInactive(ctx)
-        TODO("reconnect")
+        if (ctx == null) {
+            return
+        }
+        try {
+//            TODO("reconnect")
+        } catch (ex: Exception) {
+            connContext.connectorToTransferConnManager.removeConn(ctx)
+        }
     }
 
     override fun channelActive(ctx: ChannelHandlerContext?) {
         super.channelActive(ctx)
         if (ctx != null) {
-            connContext.transferConnContextManager.addConn(ConnectorToTransferConn(ctx))
+            connContext.connectorToTransferConnManager.addConn(ConnectorToTransferConn(ctx))
         }
     }
 
     override fun exceptionCaught(ctx: ChannelHandlerContext?, cause: Throwable?) {
         if (ctx != null) {
-            connContext.transferConnContextManager.removeConn(ctx)
+            connContext.connectorToTransferConnManager.removeConn(ctx)
         }
     }
 
@@ -36,7 +43,6 @@ class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>()
         if (ctx == null || msg == null) {
             return
         }
-        val consumer = connContext.clientMsgParseManager.getRequestParse(msg.header.type)
-        consumer.accept(msg, ctx)
+
     }
 }

@@ -10,6 +10,8 @@ interface ImConnManager<C : IMConn> {
 
     fun getConn(netId: Serializable): C?
 
+    fun randomConn(): C?
+
     fun addConn(conn: C)
 
     fun removeConn(netId: Serializable)
