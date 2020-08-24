@@ -1,7 +1,7 @@
 package com.kamijoucen.cenim.connector.conn
 
 import com.kamijoucen.cenim.common.domain.IMConn
-import com.kamijoucen.cenim.connector.manager.ChCtx
+import com.kamijoucen.cenim.connector.util.ChCtx
 import java.io.Serializable
 
 class ClientToConnectorConn(private val ctx: ChCtx) : IMConn {

@@ -15,7 +15,7 @@ import io.netty.channel.socket.nio.NioSocketChannel
 fun startConnectorClient(config: ConnectorConfig): Boolean {
     val transferUrls = config.transfer
     transferUrls.forEach {
-        var url = it.split(":")
+        val url = it.split(":")
         startClient(url[0], url[1])
     }
     return false

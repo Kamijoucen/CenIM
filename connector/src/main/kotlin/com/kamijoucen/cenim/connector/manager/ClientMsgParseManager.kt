@@ -1,10 +1,8 @@
 package com.kamijoucen.cenim.connector.manager
 
 import com.kamijoucen.cenim.common.domain.IMConsumer
-import com.kamijoucen.cenim.message.msg.MessageBody
-import com.kamijoucen.cenim.message.msg.RequestBodyType
-import com.kamijoucen.cenim.message.msg.RequestMessage
-import com.kamijoucen.cenim.message.msg.ResponseMessage
+import com.kamijoucen.cenim.connector.util.ChCtx
+import com.kamijoucen.cenim.message.msg.*
 import org.springframework.stereotype.Component
 import java.util.concurrent.ConcurrentHashMap
 
@@ -19,11 +17,24 @@ class ClientMsgParseManager {
         RequestBodyType.values().forEach {
             when (it.type) {
                 RequestBodyType.STRING_MSG.type ->
-                    requestParseMap[it.type] = MsgHandleFac.stringMsg()
+                    requestParseMap[it.type] = ReqParseFac.stringMsg()
                 RequestBodyType.CUSTOM_MSG.type ->
-                    requestParseMap[it.type] = MsgHandleFac.customMsg()
+                    requestParseMap[it.type] = ReqParseFac.customMsg()
                 RequestBodyType.CUSTOM_MSG.type ->
-                    requestParseMap[it.type] = MsgHandleFac.onlineMsg()
+                    requestParseMap[it.type] = ReqParseFac.onlineMsg()
+                else ->
+                    TODO("no handler type: ${it.type}")
+            }
+        }
+
+        ResponseBodyType.values().forEach {
+            when (it.type) {
+                ResponseBodyType.STRING_MSG.type ->
+                    responseParseMap[it.type] = ResParseFac.stringMsg()
+                ResponseBodyType.CUSTOM_MSG.type ->
+                    responseParseMap[it.type] = ResParseFac.customMsg()
+                ResponseBodyType.ACK_MSG.type ->
+                    responseParseMap[it.type] = ResParseFac.ackMsg()
                 else ->
                     TODO("no handler type: ${it.type}")
             }

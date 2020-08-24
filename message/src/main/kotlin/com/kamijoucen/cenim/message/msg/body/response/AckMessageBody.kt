@@ -4,11 +4,7 @@ import com.kamijoucen.cenim.message.msg.MessageBody
 
 typealias AckMsgBody = AckMessageBody
 
-class AckMessageBody(var content: String) : MessageBody() {
+class AckMessageBody(val srcId: String) : MessageBody() {
 
-    override fun execute(): AckMessageResult {
-        val result = AckMessageResult()
-        result.text = this.content
-        return result
-    }
+    override fun execute() = AckMessageResult(srcId)
 }

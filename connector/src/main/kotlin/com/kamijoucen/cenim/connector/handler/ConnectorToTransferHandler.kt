@@ -38,7 +38,5 @@ class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>()
         }
         val consumer = connContext.clientMsgParseManager.getRequestParse(msg.header.type)
         consumer.accept(msg, ctx)
-
-
     }
 }

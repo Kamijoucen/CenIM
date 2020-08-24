@@ -3,6 +3,8 @@ package com.kamijoucen.cenim.message.msg
 import com.kamijoucen.cenim.message.msg.body.CustomMessageBody
 import com.kamijoucen.cenim.message.msg.body.StringMessageBody
 import com.kamijoucen.cenim.message.msg.body.StringMessageResult
+import com.kamijoucen.cenim.message.msg.body.response.AckMessageBody
+import com.kamijoucen.cenim.message.msg.body.response.AckMessageResult
 import java.util.function.Predicate
 
 enum class ResponseBodyType(val type: Int,
@@ -10,8 +12,9 @@ enum class ResponseBodyType(val type: Int,
                             val opResultClass: Class<out MessageResult>) {
 
     STRING_MSG(1, StringMessageBody::class.java, StringMessageResult::class.java),
-    CUSTOM_MSG(2, CustomMessageBody::class.java, StringMessageResult::class.java);
-//    ACT_CHAT(2, )
+    CUSTOM_MSG(2, CustomMessageBody::class.java, StringMessageResult::class.java),
+    ACK_MSG(3, AckMessageBody::class.java, AckMessageResult::class.java),
+    ;
 
     companion object {}
 
