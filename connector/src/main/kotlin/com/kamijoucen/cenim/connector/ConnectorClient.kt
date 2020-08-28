@@ -11,6 +11,9 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelPipeline
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioSocketChannel
+import org.apache.commons.logging.LogFactory
+
+private val LOG = LogFactory.getLog("ConnectorClient")
 
 fun startConnectorClient(config: ConnectorConfig): Boolean {
     val transferUrls = config.transfer
@@ -43,9 +46,12 @@ private fun startClient(host: String, port: String) {
             }
         })
         val channelFuture = bootstrap.connect(host, Integer.parseInt(port))
+        channelFuture.addListener() {
+            if (it.isSuccess) it.cause().printStackTrace()
+        }
         channelFuture.sync()
     } finally {
-        group.shutdownGracefully()
+//        group.shutdownGracefully()
     }
 
 }

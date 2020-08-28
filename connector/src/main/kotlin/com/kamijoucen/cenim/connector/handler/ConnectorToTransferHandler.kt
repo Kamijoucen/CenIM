@@ -15,7 +15,7 @@ class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>()
     lateinit var connContext: ConnectorContext
 
     override fun channelInactive(ctx: ChannelHandlerContext?) {
-        super.channelInactive(ctx)
+//        super.channelInactive(ctx)
         if (ctx == null) {
             return
         }
@@ -27,7 +27,7 @@ class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>()
     }
 
     override fun channelActive(ctx: ChannelHandlerContext?) {
-        super.channelActive(ctx)
+//        super.channelActive(ctx)
         if (ctx != null) {
             connContext.connectorToTransferConnManager.addConn(ConnectorToTransferConn(ctx))
         }
@@ -40,9 +40,10 @@ class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>()
     }
 
     override fun channelRead0(ctx: ChannelHandlerContext?, msg: RequestMessage?) {
+        println("aaaagg")
         if (ctx == null || msg == null) {
             return
         }
-
+        println("111111111111111111111-----------222222222222")
     }
 }

@@ -25,13 +25,13 @@ class ClientToCollectorHandler : SimpleChannelInboundHandler<RequestMessage>() {
         consumer.accept(msg, ctx)
     }
 
-    override fun channelActive(ctx: ChannelHandlerContext?) {
-        super.channelActive(ctx)
-//        TODO("LOG...")
-    }
-
-    override fun channelInactive(ctx: ChannelHandlerContext?) {
-        super.channelInactive(ctx)
-//        TODO("reconnect...")
-    }
+//    override fun channelActive(ctx: ChannelHandlerContext?) {
+//        super.channelActive(ctx)
+////        TODO("LOG...")
+//    }
+//
+//    override fun channelInactive(ctx: ChannelHandlerContext?) {
+//        super.channelInactive(ctx)
+////        TODO("reconnect...")
+//    }
 }

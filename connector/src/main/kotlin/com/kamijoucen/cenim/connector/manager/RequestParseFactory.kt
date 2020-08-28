@@ -23,7 +23,9 @@ internal fun RequestParseFactory.Companion.stringMsg(): IMConsumer<Message, ChCt
             connCtx.connectorToTransferConnManager
                     .randomConn()
                     ?.getCtx()
+                    ?.channel()
                     ?.writeAndFlush(msg)
+            println(msg.body.execute().getContent())
         }
     }
 }
@@ -32,6 +34,7 @@ internal fun RequestParseFactory.Companion.customMsg(): IMConsumer<Message, ChCt
     return object : IMConsumer<Message, ChCtx> {
         override fun accept(msg: Message, ctx: ChCtx) {
 //            TODO("Not yet implemented")
+            println("RequestParseFactory.Companion.customMsg")
             println(msg.body.execute().getContent())
         }
     }

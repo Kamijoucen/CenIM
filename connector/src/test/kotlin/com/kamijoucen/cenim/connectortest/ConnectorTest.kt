@@ -65,7 +65,7 @@ class ConnectorTest {
         channelFuture.channel().writeAndFlush(requestMessage)
 
 
-        val header2 = MessageHeader(1, RequestBodyType.CUSTOM_MSG.type, 11, 22, 33)
+        val header2 = MessageHeader(1, RequestBodyType.CUSTOM_MSG.type, 11, 22, 44)
         val cusBody = CustomMessageBody().also {
             it.addParam("lg", "贾静")
             it.addParam("lp", "李思岑")
@@ -75,8 +75,6 @@ class ConnectorTest {
         channelFuture.channel().writeAndFlush(requestMessage2)
 
         channelFuture.channel().closeFuture().sync()
-
-
 
     }
 

@@ -23,11 +23,11 @@ class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>()
 
     override fun channelActive(ctx: ChannelHandlerContext?) {
         super.channelActive(ctx)
-        TODO("LOG...")
+//        TODO("LOG...")
     }
 
     override fun channelInactive(ctx: ChannelHandlerContext?) {
         super.channelInactive(ctx)
-        TODO("reconnect...")
+//        TODO("reconnect...")
     }
 }
