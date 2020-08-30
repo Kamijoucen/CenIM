@@ -2,9 +2,8 @@ package com.kamijoucen.cenim.connector.manager
 
 import com.kamijoucen.cenim.common.domain.IMConsumer
 import com.kamijoucen.cenim.common.util.ContextUtil
-import com.kamijoucen.cenim.connector.util.ChCtx
+import com.kamijoucen.cenim.common.util.ChCtx
 import com.kamijoucen.cenim.message.msg.Message
-import com.kamijoucen.cenim.message.msg.body.StringMessageResult
 import kotlin.random.Random
 
 typealias ReqParseFac = RequestParseFactory
@@ -20,7 +19,7 @@ internal fun RequestParseFactory.Companion.stringMsg(): IMConsumer<Message, ChCt
         override fun accept(msg: Message, ctx: ChCtx) {
             val connCtx = ContextUtil.getBean(ConnectorContext::class.java)
             msg.header.msgId = Random.Default.nextLong()
-            connCtx.connectorToTransferConnManager
+            connCtx.connectorToTransferServerConnManager
                     .randomConn()
                     ?.getCtx()
                     ?.channel()
@@ -46,7 +45,7 @@ internal fun RequestParseFactory.Companion.onlineMsg(): IMConsumer<Message, ChCt
             // todo auth
             val connCtx = ContextUtil.getBean(ConnectorContext::class.java)
             msg.header.msgId = Random.Default.nextLong()
-            connCtx.connectorToTransferConnManager
+            connCtx.connectorToTransferServerConnManager
                     .randomConn()
                     ?.getCtx()
                     ?.writeAndFlush(msg)

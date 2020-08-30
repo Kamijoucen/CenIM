@@ -10,7 +10,7 @@ class ConnectorContext {
     lateinit var clientToConnectorConnManager: ClientToConnectorConnManager
 
     @Autowired
-    lateinit var connectorToTransferConnManager: ConnectorToTransferConnManager
+    lateinit var connectorToTransferServerConnManager: ConnectorToTransferServerConnManager
 
     @Autowired
     lateinit var clientMsgParseManager: ClientMsgParseManager

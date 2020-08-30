@@ -1,4 +1,4 @@
-package com.kamijoucen.cenim.connector.util
+package com.kamijoucen.cenim.common.util
 
 import io.netty.channel.ChannelHandlerContext
 

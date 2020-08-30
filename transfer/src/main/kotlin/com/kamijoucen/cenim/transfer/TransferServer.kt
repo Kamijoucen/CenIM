@@ -5,7 +5,7 @@ import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
 import com.kamijoucen.cenim.message.codec.server.ServerMessageProtocolDecoder
 import com.kamijoucen.cenim.message.codec.server.ServerMessageProtocolEncoder
-import com.kamijoucen.cenim.transfer.handler.ConnectorToTransferHandler
+import com.kamijoucen.cenim.transfer.handler.ConnectorClientToTransferHandler
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.EventLoopGroup
@@ -29,7 +29,7 @@ fun startTransferServer(config: TransferConfig): Boolean {
                             .addLast("frameEncode", MessageFrameEncoder())
                             .addLast("protocolDecode", ServerMessageProtocolDecoder())
                             .addLast("protocolEncode", ServerMessageProtocolEncoder())
-                            .addLast("messageHandler", ContextUtil.getBean(ConnectorToTransferHandler::class.java))
+                            .addLast("messageHandler", ContextUtil.getBean(ConnectorClientToTransferHandler::class.java))
                 }
             })
 

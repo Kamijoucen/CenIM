@@ -1,6 +1,6 @@
 package com.kamijoucen.cenim.connector.handler
 
-import com.kamijoucen.cenim.connector.conn.ConnectorToTransferConn
+import com.kamijoucen.cenim.connector.domain.ConnectorToTransferServerConn
 import com.kamijoucen.cenim.connector.manager.ConnectorContext
 import com.kamijoucen.cenim.message.msg.RequestMessage
 import io.netty.channel.ChannelHandlerContext
@@ -22,20 +22,20 @@ class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>()
         try {
 //            TODO("reconnect")
         } catch (ex: Exception) {
-            connContext.connectorToTransferConnManager.removeConn(ctx)
+            connContext.connectorToTransferServerConnManager.removeConn(ctx)
         }
     }
 
     override fun channelActive(ctx: ChannelHandlerContext?) {
 //        super.channelActive(ctx)
         if (ctx != null) {
-            connContext.connectorToTransferConnManager.addConn(ConnectorToTransferConn(ctx))
+            connContext.connectorToTransferServerConnManager.addConn(ConnectorToTransferServerConn(ctx))
         }
     }
 
     override fun exceptionCaught(ctx: ChannelHandlerContext?, cause: Throwable?) {
         if (ctx != null) {
-            connContext.connectorToTransferConnManager.removeConn(ctx)
+            connContext.connectorToTransferServerConnManager.removeConn(ctx)
         }
     }
 

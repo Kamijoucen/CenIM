@@ -1,7 +1,7 @@
 package com.kamijoucen.cenim.connector.manager
 
 import com.kamijoucen.cenim.common.domain.IMConsumer
-import com.kamijoucen.cenim.connector.util.ChCtx
+import com.kamijoucen.cenim.common.util.ChCtx
 import com.kamijoucen.cenim.message.msg.*
 import org.springframework.stereotype.Component
 import java.util.concurrent.ConcurrentHashMap

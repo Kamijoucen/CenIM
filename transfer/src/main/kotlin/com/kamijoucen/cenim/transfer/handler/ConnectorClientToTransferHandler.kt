@@ -3,12 +3,18 @@ package com.kamijoucen.cenim.transfer.handler
 import com.kamijoucen.cenim.message.msg.RequestMessage
 import com.kamijoucen.cenim.message.msg.ResponseMessage
 import com.kamijoucen.cenim.message.msg.body.StringMessageBody
+import com.kamijoucen.cenim.transfer.domain.ConnectorClientToTransferConn
+import com.kamijoucen.cenim.transfer.manager.TransferContext
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>() {
+class ConnectorClientToTransferHandler : SimpleChannelInboundHandler<RequestMessage>() {
+
+    @Autowired
+    private lateinit var transferContext: TransferContext
 
     override fun channelRead0(context: ChannelHandlerContext?, msg: RequestMessage?) {
         if (context == null || msg == null) {
@@ -22,8 +28,10 @@ class ConnectorToTransferHandler : SimpleChannelInboundHandler<RequestMessage>()
     }
 
     override fun channelActive(ctx: ChannelHandlerContext?) {
-        super.channelActive(ctx)
-//        TODO("LOG...")
+        if (ctx == null) {
+            return
+        }
+        transferContext.connectorClientToTransferConnManager.addConn(ConnectorClientToTransferConn(ctx))
     }
 
     override fun channelInactive(ctx: ChannelHandlerContext?) {
