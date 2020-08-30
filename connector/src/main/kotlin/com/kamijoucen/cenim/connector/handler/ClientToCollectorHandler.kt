@@ -1,9 +1,8 @@
 package com.kamijoucen.cenim.connector.handler
 
 import com.kamijoucen.cenim.connector.manager.ConnectorContext
+import com.kamijoucen.cenim.connector.service.MsgSender
 import com.kamijoucen.cenim.message.msg.RequestMessage
-import com.kamijoucen.cenim.message.msg.ResponseMessage
-import com.kamijoucen.cenim.message.msg.body.StringMessageBody
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,14 +14,15 @@ class ClientToCollectorHandler : SimpleChannelInboundHandler<RequestMessage>() {
     @Autowired
     lateinit var connContext: ConnectorContext
 
+    @Autowired
+    lateinit var msgSender: MsgSender
+
     override fun channelRead0(ctx: ChannelHandlerContext?, msg: RequestMessage?) {
         if (ctx == null || msg == null) {
             return
         }
-        val result = msg.body.execute()
-
-        val consumer = connContext.clientMsgParseManager.getRequestParse(msg.header.type)
-        consumer.accept(msg, ctx)
+        connContext.clientMsgParseManager.getRequestParse(msg.header.type).accept(msg, ctx)
+        msgSender.sendMsg(msg, ctx)
     }
 
 //    override fun channelActive(ctx: ChannelHandlerContext?) {

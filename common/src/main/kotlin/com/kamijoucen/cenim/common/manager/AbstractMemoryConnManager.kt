@@ -10,6 +10,10 @@ abstract class AbstractMemoryConnManager<C : IMConn> : ImConnManager<C> {
 
     private val connMap = ConcurrentHashMap<Serializable, C>()
 
+    override fun getConn(): C? {
+        return randomConn()
+    }
+
     override fun getConn(ctx: ChannelHandlerContext): C? {
         TODO("Not yet implemented")
     }
@@ -20,9 +24,7 @@ abstract class AbstractMemoryConnManager<C : IMConn> : ImConnManager<C> {
 
     override fun randomConn(): C? {
         return when (connMap.size) {
-            0 -> {
-                null
-            }
+            0 -> null
             else -> connMap.toList()[Random.Default.nextInt(connMap.size)].second
         }
     }

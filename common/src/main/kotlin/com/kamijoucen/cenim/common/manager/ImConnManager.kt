@@ -6,6 +6,8 @@ import java.io.Serializable
 
 interface ImConnManager<C : IMConn> {
 
+    fun getConn(): C?
+
     fun getConn(ctx: ChannelHandlerContext): C?
 
     fun getConn(netId: Serializable): C?
