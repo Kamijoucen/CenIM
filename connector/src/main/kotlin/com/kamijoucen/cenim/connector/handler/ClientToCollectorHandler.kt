@@ -25,10 +25,11 @@ class ClientToCollectorHandler : SimpleChannelInboundHandler<RequestMessage>() {
         if (ctx == null || msg == null) {
             return
         }
+        // send ack msg
         ackSender.ack(msg, ctx)
-        // todo 每一层对消息的处理逻辑可能不一样，这里处理类考虑分开写
-        connContext.clientMsgParseManager.getRequestParse(msg.header.type).accept(msg, ctx)
-
+        // parse msg
+        connContext.connectorMsgParseManager.getRequestParse(msg.header.type).accept(msg, ctx)
+        // msg to transfer
         msgSender.sendMsg(msg)
     }
 

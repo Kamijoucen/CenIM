@@ -13,6 +13,6 @@ class ConnectorContext {
     lateinit var connectorToTransferServerConnManager: ConnectorToTransferServerConnManager
 
     @Autowired
-    lateinit var clientMsgParseManager: ClientMsgParseManager
+    lateinit var connectorMsgParseManager: ConnectorMsgParseManager
 
 }

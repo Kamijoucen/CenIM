@@ -1,6 +1,5 @@
 package com.kamijoucen.cenim.connector.service
 
-import com.kamijoucen.cenim.common.util.ChCtx
 import com.kamijoucen.cenim.connector.manager.ConnectorContext
 import com.kamijoucen.cenim.message.msg.RequestMessage
 import org.apache.commons.logging.LogFactory
@@ -21,6 +20,8 @@ class MsgSender {
             log.error("connector to transfer conn not fount!")
             return
         }
-        conn.getCtx().channel().writeAndFlush(msg)
+        if (conn.getCtx().channel().isOpen) {
+            conn.getCtx().channel().writeAndFlush(msg)
+        }
     }
 }

@@ -3,11 +3,14 @@ package com.kamijoucen.cenim.connector.manager
 import com.kamijoucen.cenim.common.domain.IMConsumer
 import com.kamijoucen.cenim.common.util.ChCtx
 import com.kamijoucen.cenim.message.msg.*
+import org.apache.commons.logging.LogFactory
 import org.springframework.stereotype.Component
 import java.util.concurrent.ConcurrentHashMap
 
 @Component
-class ClientMsgParseManager {
+class ConnectorMsgParseManager {
+
+    private val log = LogFactory.getLog("ConnectorMsgParseManager")
 
     private val requestParseMap = ConcurrentHashMap<Int, IMConsumer<in RequestMessage, ChCtx>>()
 
@@ -23,7 +26,7 @@ class ClientMsgParseManager {
                 RequestBodyType.ONLINE_MSG.type ->
                     requestParseMap[it.type] = ReqParseFac.onlineMsg()
                 else ->
-                    TODO("no handler type: ${it.type}")
+                    log.warn("request msg parse not impl! type:${it.type}")
             }
         }
 
@@ -36,7 +39,7 @@ class ClientMsgParseManager {
                 ResponseBodyType.ACK_MSG.type ->
                     responseParseMap[it.type] = ResParseFac.ackMsg()
                 else ->
-                    TODO("no handler type: ${it.type}")
+                    log.warn("response msg parse not impl! type:${it.type}")
             }
         }
     }
