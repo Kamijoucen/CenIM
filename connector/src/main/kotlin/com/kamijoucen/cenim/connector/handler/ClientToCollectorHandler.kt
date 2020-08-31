@@ -29,7 +29,7 @@ class ClientToCollectorHandler : SimpleChannelInboundHandler<RequestMessage>() {
         ackSender.ack(msg, ctx)
         // parse msg
         connContext.connectorMsgParseManager.getRequestParse(msg.header.type).accept(msg, ctx)
-        // msg to transfer
+        // send msg to transfer
         msgSender.sendMsg(msg)
     }
 
