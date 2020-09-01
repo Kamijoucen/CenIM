@@ -11,15 +11,16 @@ internal object TransferRequestParseFactory {
 
     /**
      * 上线消息
-     * connector层只需验证访客合法性
+     * transfer需要记录 userId:busHostId 的映射关系
      */
     fun onlineMsg(): IMConsumer<Message, ChCtx> {
         return object : IMConsumer<Message, ChCtx> {
             override fun accept(msg: Message, ctx: ChCtx): ConsumeResult {
-                val result = msg.body.execute() as OnlineMessageResult
+                val userId = msg.body.execute().getContent()
+                val context = ContextUtil.getBean(TransferContext::class.java)
 
-                ContextUtil.getBean(TransferContext::class.java)
-                        .connectorClientToTransferConnManager.removeConn(ctx)
+                // context.cacheManager.set(userId, )
+
                 return ConsumeResult(true)
             }
         }
