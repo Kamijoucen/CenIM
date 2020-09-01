@@ -15,15 +15,9 @@ import org.springframework.stereotype.Component
 @Component
 class ConnectorClientToTransferHandler : SimpleChannelInboundHandler<RequestMessage>() {
 
-    @Autowired
     private lateinit var transferContext: TransferContext
 
-    @Autowired
-    lateinit var redisTemplate: StringRedisTemplate
-
     override fun channelRead0(context: ChannelHandlerContext, msg: RequestMessage) {
-
-        redisTemplate.opsForValue().set("lisicen", "ls")
 
         val result = msg.body.execute()
         println("---------------------MSG---------------------")
