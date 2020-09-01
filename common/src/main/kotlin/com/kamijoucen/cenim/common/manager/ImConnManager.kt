@@ -14,11 +14,11 @@ interface ImConnManager<C : IMConn> {
 
     fun randomConn(): C?
 
-    fun addConn(conn: C)
+    fun addConn(conn: C): C
 
-    fun removeConn(netId: Serializable)
+    fun removeConn(netId: Serializable): C?
 
-    fun removeConn(ctx: ChannelHandlerContext)
+    fun removeConn(ctx: ChannelHandlerContext): C?
 
     fun removeAllConn()
 

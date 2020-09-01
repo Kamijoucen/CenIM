@@ -29,15 +29,16 @@ abstract class AbstractMemoryConnManager<C : IMConn> : ImConnManager<C> {
         }
     }
 
-    override fun addConn(conn: C) {
+    override fun addConn(conn: C): C {
         connMap[conn.getId()] = conn
+        return conn
     }
 
-    override fun removeConn(netId: Serializable) {
-        connMap.remove(netId)
+    override fun removeConn(netId: Serializable): C? {
+        return connMap.remove(netId)
     }
 
-    override fun removeConn(ctx: ChannelHandlerContext) {
+    override fun removeConn(ctx: ChannelHandlerContext): C? {
         TODO("Not yet implemented")
     }
 

@@ -28,9 +28,12 @@ class ClientToCollectorHandler : SimpleChannelInboundHandler<RequestMessage>() {
         // send ack msg
         ackSender.ack(msg, ctx)
         // parse msg
-        connContext.connectorMsgParseManager.getRequestParse(msg.header.type).accept(msg, ctx)
+        val result = connContext.connectorMsgParseManager.getRequestParse(msg.header.type)
+                ?.accept(msg, ctx)
         // send msg to transfer
-        msgSender.sendMsg(msg)
+        if (result?.success == true) {
+            msgSender.sendMsg(msg)
+        }
     }
 
 //    override fun channelActive(ctx: ChannelHandlerContext?) {

@@ -12,28 +12,3 @@ class ResponseParseFactory {
     companion object {}
 
 }
-
-internal fun ResponseParseFactory.Companion.stringMsg(): IMConsumer<Message, ChCtx> {
-    return object : IMConsumer<Message, ChCtx> {
-        override fun accept(msg: Message, ctx: ChCtx) {
-            var result: StringMessageResult = msg.body.execute() as StringMessageResult
-            TODO("Not yet implemented")
-        }
-    }
-}
-
-internal fun ResponseParseFactory.Companion.customMsg(): IMConsumer<Message, ChCtx> {
-    return object : IMConsumer<Message, ChCtx> {
-        override fun accept(msg: Message, ctx: ChCtx) {
-            TODO("Not yet implemented")
-        }
-    }
-}
-
-internal fun ResponseParseFactory.Companion.ackMsg(): IMConsumer<Message, ChCtx> {
-    return object : IMConsumer<Message, ChCtx> {
-        override fun accept(msg: Message, ctx: ChCtx) {
-            TODO("Not yet implemented")
-        }
-    }
-}
