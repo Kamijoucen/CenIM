@@ -31,7 +31,7 @@ class ClientToCollectorHandler : SimpleChannelInboundHandler<RequestMessage>() {
         val result = connContext.connectorMsgParseManager.getRequestParse(msg.header.type)
                 ?.accept(msg, ctx)
         // send msg to transfer
-        if (result?.success == true) {
+        if (result == null || result.success) {
             msgSender.sendMsg(msg)
         }
     }

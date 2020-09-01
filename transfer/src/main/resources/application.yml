@@ -3,3 +3,7 @@ app:
     port: 5239
     business:
       - "127.0.0.1:5240"
+spring:
+  redis:
+    host: 127.1.1.1
+    port: 6379

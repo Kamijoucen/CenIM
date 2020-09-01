@@ -8,7 +8,9 @@ import com.kamijoucen.cenim.transfer.manager.TransferContext
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.stereotype.Component
+
 
 @Component
 class ConnectorClientToTransferHandler : SimpleChannelInboundHandler<RequestMessage>() {
@@ -16,10 +18,13 @@ class ConnectorClientToTransferHandler : SimpleChannelInboundHandler<RequestMess
     @Autowired
     private lateinit var transferContext: TransferContext
 
-    override fun channelRead0(context: ChannelHandlerContext?, msg: RequestMessage?) {
-        if (context == null || msg == null) {
-            return
-        }
+    @Autowired
+    lateinit var redisTemplate: StringRedisTemplate
+
+    override fun channelRead0(context: ChannelHandlerContext, msg: RequestMessage) {
+
+        redisTemplate.opsForValue().set("lisicen", "ls")
+
         val result = msg.body.execute()
         println("---------------------MSG---------------------")
         println(result.getContent())
@@ -27,10 +32,7 @@ class ConnectorClientToTransferHandler : SimpleChannelInboundHandler<RequestMess
         context.writeAndFlush(responseMessage)
     }
 
-    override fun channelActive(ctx: ChannelHandlerContext?) {
-        if (ctx == null) {
-            return
-        }
+    override fun channelActive(ctx: ChannelHandlerContext) {
         transferContext.connectorClientToTransferConnManager.addConn(ConnectorClientToTransferConn(ctx))
     }
 
