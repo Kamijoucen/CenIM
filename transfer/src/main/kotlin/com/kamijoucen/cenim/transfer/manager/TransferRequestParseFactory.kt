@@ -14,15 +14,13 @@ internal object TransferRequestParseFactory {
      * transfer需要记录 userId:busHostId 的映射关系
      */
     fun onlineMsg(): IMConsumer<Message, ChCtx> {
-        return object : IMConsumer<Message, ChCtx> {
-            override fun accept(msg: Message, ctx: ChCtx): ConsumeResult {
-                val userId = msg.body.execute().getContent()
-                val context = ContextUtil.getBean(TransferContext::class.java)
+        return IMConsumer { msg, ctx ->
+            val userId = msg.body.execute().getContent()
+            val context = ContextUtil.getBean(TransferContext::class.java)
 
-                // context.cacheManager.set(userId, )
+            // context.cacheManager.set(userId, )
 
-                return ConsumeResult(true)
-            }
+            ConsumeResult(true)
         }
     }
 

@@ -15,17 +15,15 @@ internal object RequestParseFactory {
      * connector层只需验证访客合法性
      */
     fun onlineMsg(): IMConsumer<Message, ChCtx> {
-        return object : IMConsumer<Message, ChCtx> {
-            override fun accept(msg: Message, ctx: ChCtx): ConsumeResult {
-                val result = msg.body.execute() as OnlineMessageResult
-                val id = result.getProperty("id")
-                return if (id != "admin") {
-                    ContextUtil.getBean(ConnectorContext::class.java)
-                            .clientToConnectorConnManager.removeConn(ctx)?.close()
-                    // TODO: 2020/9/1
-                    ConsumeResult(false)
-                } else ConsumeResult(true)
-            }
+        return IMConsumer { msg, ctx ->
+            val result = msg.body.execute() as OnlineMessageResult
+            val id = result.getProperty("id")
+            if (id != "admin") {
+                ContextUtil.getBean(ConnectorContext::class.java)
+                        .clientToConnectorConnManager.removeConn(ctx)?.close()
+                // TODO: 2020/9/1
+                ConsumeResult(false)
+            } else ConsumeResult(true)
         }
     }
 
