@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
     // 加载配置
     val config = ContextUtil.getBean(TransferConfig::class.java)
     // 链接 business 层
-//    var clientSuccess = startBusinessClient(config)
+    var clientSuccess = startBusinessClient(config)
     // 启动服务器
     val serverSuccess = startTransferServer(config)
     println(config)

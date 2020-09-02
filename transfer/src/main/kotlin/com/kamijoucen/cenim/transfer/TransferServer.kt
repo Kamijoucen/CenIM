@@ -14,12 +14,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
 
 fun startTransferServer(config: TransferConfig): Boolean {
-
-    val bossGroup: EventLoopGroup = NioEventLoopGroup()
-    val workGroup: EventLoopGroup = NioEventLoopGroup()
-
     val bootstrap = ServerBootstrap()
-            .group(bossGroup, workGroup)
+            .group(NioEventLoopGroup(), NioEventLoopGroup())
             .channel(NioServerSocketChannel::class.java)
             .childHandler(object : ChannelInitializer<NioSocketChannel>() {
                 @Throws(Exception::class)
@@ -32,7 +28,6 @@ fun startTransferServer(config: TransferConfig): Boolean {
                             .addLast("messageHandler", ContextUtil.getBean(ConnectorClientToTransferHandler::class.java))
                 }
             })
-
     bootstrap.bind(config.port).sync()
     return true
 }

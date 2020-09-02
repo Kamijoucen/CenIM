@@ -1,4 +1,4 @@
-package com.kamijoucen.cenim.transfer.manager
+package com.kamijoucen.cenim.common.manager
 
 interface ICacheManager {
 

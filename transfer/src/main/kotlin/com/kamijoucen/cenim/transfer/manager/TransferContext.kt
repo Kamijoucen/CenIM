@@ -1,5 +1,6 @@
 package com.kamijoucen.cenim.transfer.manager
 
+import com.kamijoucen.cenim.common.manager.ICacheManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
@@ -15,6 +16,6 @@ class TransferContext {
     lateinit var connectorClientToTransferConnManager: ConnectorClientToTransferConnManager
 
     @Autowired
-    lateinit var requestParseManager: TransferMsgParseManager
+    lateinit var msgParseManager: TransferMsgParseManager
 
 }

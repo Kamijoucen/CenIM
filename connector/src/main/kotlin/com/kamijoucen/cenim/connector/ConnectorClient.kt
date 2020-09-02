@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory
 
 private val LOG = LogFactory.getLog("ConnectorClient")
 
-fun startConnectorClient(config: ConnectorConfig): Boolean {
+internal fun startConnectorClient(config: ConnectorConfig): Boolean {
     val transferUrls = config.transfer
     transferUrls.forEach {
         val url = it.split(":")
@@ -26,10 +26,7 @@ fun startConnectorClient(config: ConnectorConfig): Boolean {
 
 private fun startClient(host: String, port: String) {
     val bootstrap = Bootstrap()
-    bootstrap.channel(NioSocketChannel::class.java)
-
-    val group = NioEventLoopGroup()
-    bootstrap.group(group)
+    bootstrap.channel(NioSocketChannel::class.java).group(NioEventLoopGroup())
     try {
         bootstrap.handler(object : ChannelInitializer<NioSocketChannel?>() {
             @Throws(Exception::class)

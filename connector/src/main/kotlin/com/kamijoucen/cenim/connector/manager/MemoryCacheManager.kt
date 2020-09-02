@@ -1,4 +1,4 @@
-package com.kamijoucen.cenim.transfer.manager
+package com.kamijoucen.cenim.connector.manager
 
 import com.kamijoucen.cenim.common.manager.ICacheManager
 import org.springframework.context.annotation.Lazy

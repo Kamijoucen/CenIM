@@ -1,5 +1,6 @@
 package com.kamijoucen.cenim.transfer.manager
 
+import com.kamijoucen.cenim.common.manager.ICacheManager
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
 
