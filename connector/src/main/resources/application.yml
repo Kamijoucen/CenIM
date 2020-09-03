@@ -1,9 +1,0 @@
-app:
-  connector:
-    port: 5238
-    transfer:
-      - "127.0.0.1:5239"
-spring:
-  redis:
-    host: 123.2.2.2
-    port: 6379
