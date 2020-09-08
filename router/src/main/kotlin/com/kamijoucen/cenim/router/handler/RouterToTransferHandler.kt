@@ -14,11 +14,7 @@ class RouterToServiceHandler : SimpleChannelInboundHandler<ResponseMessage>() {
     @Autowired
     lateinit var connContext: RouterContext
 
-    override fun channelInactive(ctx: ChannelHandlerContext?) {
-//        super.channelInactive(ctx)
-        if (ctx == null) {
-            return
-        }
+    override fun channelInactive(ctx: ChannelHandlerContext) {
         try {
 //            TODO("reconnect")
         } catch (ex: Exception) {
@@ -26,23 +22,16 @@ class RouterToServiceHandler : SimpleChannelInboundHandler<ResponseMessage>() {
         }
     }
 
-    override fun channelActive(ctx: ChannelHandlerContext?) {
-        if (ctx != null) {
-            connContext.routerToServiceServerConnManager.addConn(RouterToServiceServerConn(ctx))
-        }
+    override fun channelActive(ctx: ChannelHandlerContext) {
+        connContext.routerToServiceServerConnManager.addConn(RouterToServiceServerConn(ctx))
     }
 
-    override fun exceptionCaught(ctx: ChannelHandlerContext?, cause: Throwable?) {
-        if (ctx != null) {
-            connContext.routerToServiceServerConnManager.removeConn(ctx)
-        }
+    override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
+        connContext.routerToServiceServerConnManager.removeConn(ctx)
     }
 
-    override fun channelRead0(ctx: ChannelHandlerContext?, msg: ResponseMessage?) {
+    override fun channelRead0(ctx: ChannelHandlerContext, msg: ResponseMessage) {
         println("aaaagg")
-        if (ctx == null || msg == null) {
-            return
-        }
         println("111111111111111111111-----------222222222222")
     }
 }

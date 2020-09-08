@@ -6,8 +6,6 @@ class StringMessageResult : MessageResult() {
 
     var text = ""
 
-    override fun getProperty(key: String): String = ""
-
     override fun getContent(): String = text
 
 }
