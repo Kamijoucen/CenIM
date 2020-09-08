@@ -2,8 +2,12 @@ package com.kamijoucen.cenim.router.util
 
 object MappingKeyGenerator {
 
-    fun userHostKey(userId: String): String {
+    fun userToServiceKey(userId: String): String {
         return "router:user-host:${userId}"
+    }
+
+    fun userToRouterKey(userId: String): String {
+        return "client:user-host:${userId}"
     }
 
 }

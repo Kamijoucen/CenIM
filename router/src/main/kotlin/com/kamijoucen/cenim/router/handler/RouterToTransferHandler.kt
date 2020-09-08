@@ -31,7 +31,6 @@ class RouterToServiceHandler : SimpleChannelInboundHandler<ResponseMessage>() {
     }
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: ResponseMessage) {
-        println("aaaagg")
-        println("111111111111111111111-----------222222222222")
+
     }
 }

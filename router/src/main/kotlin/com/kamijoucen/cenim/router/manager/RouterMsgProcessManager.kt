@@ -21,6 +21,7 @@ class RouterMsgProcessManager {
         RequestBodyType.values().forEach {
             when (it.type) {
                 RequestBodyType.ONLINE_MSG.type -> onlineMsgProcess()
+                else -> log.warn("msg type not have process! type:${it.type}")
             }
         }
 
