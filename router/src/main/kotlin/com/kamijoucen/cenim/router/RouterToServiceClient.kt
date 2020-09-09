@@ -4,8 +4,8 @@ import com.kamijoucen.cenim.common.util.ContextUtil
 import com.kamijoucen.cenim.router.handler.RouterToServiceHandler
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
-import com.kamijoucen.cenim.message.codec.client.ClientMessageProtocolDecoder
-import com.kamijoucen.cenim.message.codec.client.ClientMessageProtocolEncoder
+import com.kamijoucen.cenim.message.codec.MessageProtocolDecoder
+import com.kamijoucen.cenim.message.codec.MessageProtocolEncoder
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelPipeline
@@ -37,8 +37,8 @@ private fun startClient(host: String, port: String) {
                 val pipeline: ChannelPipeline = ch.pipeline()
                 pipeline.addLast(MessageFrameDecoder())
                 pipeline.addLast(MessageFrameEncoder())
-                pipeline.addLast(ClientMessageProtocolDecoder())
-                pipeline.addLast(ClientMessageProtocolEncoder())
+                pipeline.addLast(MessageProtocolDecoder())
+                pipeline.addLast(MessageProtocolEncoder())
                 pipeline.addLast(ContextUtil.getBean(RouterToServiceHandler::class.java))
             }
         })

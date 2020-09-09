@@ -1,4 +1,4 @@
-package com.kamijoucen.cenim.common.domain
+package com.kamijoucen.cenim.common.conn
 
 
 class ConsumeResult(val success: Boolean,

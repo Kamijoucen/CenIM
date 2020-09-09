@@ -1,16 +1,14 @@
 package com.kamijoucen.cenim.router.process
 
-import com.kamijoucen.cenim.common.domain.ConsumeResult
-import com.kamijoucen.cenim.common.domain.IMConn
-import com.kamijoucen.cenim.common.domain.IMConsumer
-import com.kamijoucen.cenim.common.util.ChCtx
+import com.kamijoucen.cenim.common.conn.ConsumeResult
+import com.kamijoucen.cenim.common.conn.IMConn
+import com.kamijoucen.cenim.message.msg.util.IMConsumer
 import com.kamijoucen.cenim.common.util.ContextUtil
-import com.kamijoucen.cenim.message.msg.RequestMessage
 import com.kamijoucen.cenim.router.manager.RouterContext
 import com.kamijoucen.cenim.router.util.MappingKeyGenerator
 import com.kamijoucen.cenim.router.util.MsgSender
 
-internal fun onlineMsgProcess() = IMConsumer<RequestMessage, ChCtx> { msg, ctx ->
+internal fun onlineMsgProcess() = IMConsumer { msg, ctx ->
     val context = ContextUtil.getBean(RouterContext::class.java)
     val conn = context.routerToServiceServerConnManager.getConn()
     if (conn != null) {

@@ -1,6 +1,6 @@
 package com.kamijoucen.cenim.common.manager
 
-import com.kamijoucen.cenim.common.domain.IMConn
+import com.kamijoucen.cenim.common.conn.IMConn
 import io.netty.channel.ChannelHandlerContext
 import java.io.Serializable
 import java.util.concurrent.ConcurrentHashMap

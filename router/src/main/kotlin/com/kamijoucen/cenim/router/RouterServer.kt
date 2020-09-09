@@ -4,8 +4,8 @@ import com.kamijoucen.cenim.common.util.ContextUtil
 import com.kamijoucen.cenim.router.handler.ClientToRouterHandler
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
-import com.kamijoucen.cenim.message.codec.server.ServerMessageProtocolDecoder
-import com.kamijoucen.cenim.message.codec.server.ServerMessageProtocolEncoder
+import com.kamijoucen.cenim.message.codec.MessageProtocolDecoder
+import com.kamijoucen.cenim.message.codec.MessageProtocolEncoder
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.nio.NioEventLoopGroup
@@ -26,8 +26,8 @@ fun startRouterServer(config: RouterConfig): Boolean {
                     val pipeline = channel.pipeline()
                     pipeline.addLast("frameDecode", MessageFrameDecoder())
                             .addLast("frameEncode", MessageFrameEncoder())
-                            .addLast("protocolDecode", ServerMessageProtocolDecoder())
-                            .addLast("protocolEncode", ServerMessageProtocolEncoder())
+                            .addLast("protocolDecode", MessageProtocolDecoder())
+                            .addLast("protocolEncode", MessageProtocolEncoder())
                             .addLast("messageHandler", ContextUtil.getBean(ClientToRouterHandler::class.java))
                 }
             })

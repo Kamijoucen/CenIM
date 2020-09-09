@@ -1,9 +1,9 @@
 package com.kamijoucen.cenim.router.handler
 
+import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.router.manager.RouterContext
 import com.kamijoucen.cenim.router.util.AckSender
 import com.kamijoucen.cenim.router.util.MsgSender
-import com.kamijoucen.cenim.message.msg.RequestMessage
 import com.kamijoucen.cenim.router.domain.ClientToRouterConn
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class ClientToRouterHandler : SimpleChannelInboundHandler<RequestMessage>() {
+class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
 
     private val log = LogFactory.getLog("ClientToRouterHandler")
 
@@ -25,14 +25,17 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<RequestMessage>() {
     @Autowired
     lateinit var ackSender: AckSender
 
-    override fun channelRead0(ctx: ChannelHandlerContext, msg: RequestMessage) {
+    override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
         // send ack msg
         ackSender.ack(msg, ctx)
         // parse msg
-        val process = connContext.routerMsgProcessManager.getRequestParse(msg.header.type)
+        val process = connContext.routerMsgProcessManager.getRequestParse(msg.header.bodyType)
         if (process != null) {
-            process.accept(msg, ctx).let {
-                if (it.success && it.next) msgSender.sendMsg(msg)
+            val result = process.accept(msg, ctx)
+            if (result.success) {
+                if (result.next) msgSender.sendMsg(msg)
+            } else {
+                TODO("LOG")
             }
         } else {
             msgSender.sendMsg(msg)

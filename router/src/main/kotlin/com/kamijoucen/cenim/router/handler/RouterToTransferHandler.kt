@@ -1,15 +1,15 @@
 package com.kamijoucen.cenim.router.handler
 
+import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.router.domain.RouterToServiceServerConn
 import com.kamijoucen.cenim.router.manager.RouterContext
-import com.kamijoucen.cenim.message.msg.ResponseMessage
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class RouterToServiceHandler : SimpleChannelInboundHandler<ResponseMessage>() {
+class RouterToServiceHandler : SimpleChannelInboundHandler<Message>() {
 
     @Autowired
     lateinit var connContext: RouterContext
@@ -30,7 +30,7 @@ class RouterToServiceHandler : SimpleChannelInboundHandler<ResponseMessage>() {
         connContext.routerToServiceServerConnManager.removeConn(ctx)
     }
 
-    override fun channelRead0(ctx: ChannelHandlerContext, msg: ResponseMessage) {
+    override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
 
     }
 }

@@ -5,11 +5,11 @@ import com.kamijoucen.cenim.router.CenImRouterApp
 import com.kamijoucen.cenim.router.RouterConfig
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder
-import com.kamijoucen.cenim.message.codec.client.ClientMessageProtocolDecoder
-import com.kamijoucen.cenim.message.codec.client.ClientMessageProtocolEncoder
+import com.kamijoucen.cenim.message.codec.MessageProtocolDecoder
+import com.kamijoucen.cenim.message.codec.MessageProtocolEncoder
+import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.message.msg.MessageHeader
-import com.kamijoucen.cenim.message.msg.RequestMessage
-import com.kamijoucen.cenim.message.msg.RequestBodyType
+import com.kamijoucen.cenim.message.msg.MessageBodyType
 import com.kamijoucen.cenim.message.msg.body.CustomMessageBody
 import com.kamijoucen.cenim.message.msg.body.StringMessageBody
 import io.netty.bootstrap.Bootstrap
@@ -51,8 +51,8 @@ class RouterTest {
                 val pipeline: ChannelPipeline = ch.pipeline()
                 pipeline.addLast(MessageFrameDecoder())
                 pipeline.addLast(MessageFrameEncoder())
-                pipeline.addLast(ClientMessageProtocolDecoder())
-                pipeline.addLast(ClientMessageProtocolEncoder())
+                pipeline.addLast(MessageProtocolDecoder())
+                pipeline.addLast(MessageProtocolEncoder())
             }
         })
         val channelFuture: ChannelFuture = bootstrap.connect("127.0.0.1", 5238)
@@ -60,18 +60,18 @@ class RouterTest {
         channelFuture.sync()
 
         val operation = StringMessageBody("lisicena")
-        val header = MessageHeader(1, RequestBodyType.STRING_MSG.type, 11, 22, 33)
-        val requestMessage = RequestMessage(header, operation)
+        val header = MessageHeader(1, MessageBodyType.STRING_MSG.type, 11, 22, 33)
+        val requestMessage = Message(header, operation)
         channelFuture.channel().writeAndFlush(requestMessage)
 
 
-        val header2 = MessageHeader(1, RequestBodyType.CUSTOM_MSG.type, 11, 22, 44)
+        val header2 = MessageHeader(1, MessageBodyType.CUSTOM_MSG.type, 11, 22, 44)
         val cusBody = CustomMessageBody().also {
             it.addParam("lg", "贾静")
             it.addParam("lp", "李思岑")
             it.addParam("test", "{\"lp\":\"李思岑\",\"lg\":\"贾静\"}")
         }
-        val requestMessage2 = RequestMessage(header2, cusBody)
+        val requestMessage2 = Message(header2, cusBody)
         channelFuture.channel().writeAndFlush(requestMessage2)
 
         channelFuture.channel().closeFuture().sync()

@@ -1,4 +1,4 @@
-package com.kamijoucen.cenim.common.domain
+package com.kamijoucen.cenim.common.conn
 
 import com.kamijoucen.cenim.common.util.IdGenerator
 import io.netty.channel.ChannelHandlerContext

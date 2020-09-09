@@ -3,6 +3,7 @@ package com.kamijoucen.cenim.router.manager
 import com.kamijoucen.cenim.common.manager.ICacheManager
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
+import java.io.Serializable
 
 @Lazy
 @Component("redisCacheManager")
@@ -12,7 +13,7 @@ class RedisCacheManager : ICacheManager {
         TODO("Not yet implemented")
     }
 
-    override fun set(key: String, value: String): Boolean {
+    override fun set(key: String, value: Serializable): Boolean {
         TODO("Not yet implemented")
     }
 
