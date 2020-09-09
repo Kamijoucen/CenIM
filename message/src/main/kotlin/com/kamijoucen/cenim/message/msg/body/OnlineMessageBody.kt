@@ -1,4 +1,4 @@
-package com.kamijoucen.cenim.message.msg.body.request
+package com.kamijoucen.cenim.message.msg.body
 
 import com.kamijoucen.cenim.message.msg.MessageBody
 

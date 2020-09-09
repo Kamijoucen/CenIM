@@ -3,10 +3,10 @@ package com.kamijoucen.cenim.message.msg
 import com.kamijoucen.cenim.message.msg.body.CustomMessageBody
 import com.kamijoucen.cenim.message.msg.body.StringMessageBody
 import com.kamijoucen.cenim.message.msg.body.StringMessageResult
-import com.kamijoucen.cenim.message.msg.body.request.OnlineMessageBody
-import com.kamijoucen.cenim.message.msg.body.request.OnlineMessageResult
-import com.kamijoucen.cenim.message.msg.body.response.AckMessageBody
-import com.kamijoucen.cenim.message.msg.body.response.AckMessageResult
+import com.kamijoucen.cenim.message.msg.body.OnlineMessageBody
+import com.kamijoucen.cenim.message.msg.body.OnlineMessageResult
+import com.kamijoucen.cenim.message.msg.body.AckMessageBody
+import com.kamijoucen.cenim.message.msg.body.AckMessageResult
 
 import java.util.function.Predicate
 
