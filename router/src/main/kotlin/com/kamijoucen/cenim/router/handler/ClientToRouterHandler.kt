@@ -28,23 +28,34 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
         // send ack msg
         ackSender.ack(msg, ctx)
+
+        checkFrom(msg)
+        checkDest(msg)
+
         // parse msg
         val process = connContext.routerMsgProcessManager.getRequestParse(msg.header.bodyType)
-        if (process != null) {
-            val result = process.accept(msg, ctx)
-            if (result.success) {
-                if (result.next) msgSender.sendMsg(msg)
-            } else {
-                TODO("LOG")
-            }
-        } else {
+        if (process == null) {
+            msgSender.sendMsg(msg)
+            return
+        }
+        val result = process.accept(msg, ctx)
+        if (!result.success) {
+            return
+        }
+        if (result.connId != null) {
+            val conn = connContext.routerToServiceServerConnManager.getConn(result.connId!!)
+                    ?: return
+            msgSender.sendMsg(msg, conn)
+            return
+        }
+        if (result.next) {
             msgSender.sendMsg(msg)
         }
     }
 
-    override fun channelActive(ctx: ChannelHandlerContext) {
-        connContext.clientToRouterConnManager.addConn(ClientToRouterConn(ctx))
-    }
+//    override fun channelActive(ctx: ChannelHandlerContext) {
+//        connContext.clientToRouterConnManager.addConn(ClientToRouterConn(ctx))
+//    }
 
     override fun channelInactive(ctx: ChannelHandlerContext) {
         try {
@@ -52,5 +63,13 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
         } catch (ex: Exception) {
             connContext.routerToServiceServerConnManager.removeConn(ctx)
         }
+    }
+
+    fun checkFrom(msg: Message): Boolean {
+        return false
+    }
+
+    fun checkDest(msg: Message): Boolean {
+        return false
     }
 }

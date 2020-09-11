@@ -16,7 +16,7 @@ class MsgSender {
     private lateinit var routerContext: RouterContext
 
     fun sendMsg(msg: Message) {
-        val netId = routerContext.cacheManager.get(MappingKeyGenerator.userToServiceKey(msg.header.fromId.toString()))
+        val netId = routerContext.cacheManager.get(MappingKeyGenerator.userToServiceKey(msg.header.destId.toString()))
         if (netId != null) {
             val conn = routerContext.routerToServiceServerConnManager.getConn(netId)
             if (conn != null && conn.getCtx().channel().isOpen) {
