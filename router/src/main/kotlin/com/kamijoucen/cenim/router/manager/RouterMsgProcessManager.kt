@@ -24,8 +24,8 @@ class RouterMsgProcessManager {
         }
     }
 
-    fun getRequestParse(type: Int) = requestProcess[type]
+    fun getRequestProcess(type: Int) = requestProcess[type]
 
-    fun getResponseParse(type: Int) = responseProcess[type]
+    fun getResponseProcess(type: Int) = responseProcess[type]
 
 }

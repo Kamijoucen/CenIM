@@ -1,9 +1,11 @@
 package com.kamijoucen.cenim.router.service
 
 import com.kamijoucen.cenim.common.util.ChCtx
+import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.router.domain.ClientToRouterConn
 import com.kamijoucen.cenim.router.manager.RouterContext
 import com.kamijoucen.cenim.router.util.MappingKeyGenerator
+import com.kamijoucen.cenim.router.util.MsgSender
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -13,8 +15,11 @@ class UserStatusService {
     @Autowired
     lateinit var context: RouterContext
 
-    fun online(userId: String, ctx: ChCtx): Boolean {
-        // TODO: 2020/9/12 userId
+    @Autowired
+    lateinit var sender: MsgSender
+
+    fun online(msg: Message, ctx: ChCtx): Boolean {
+        val userId = msg.body.execute().getContent()
         val serviceConn = context.routerToServiceServerConnManager.getConn()
                 ?: return false
         val clientConn = ClientToRouterConn(ctx)
@@ -28,6 +33,7 @@ class UserStatusService {
         context.cacheManager.set(
                 MappingKeyGenerator.userToServiceKey(userId),
                 serviceConn.getId())
+        sender.sendMsg(msg, serviceConn)
         // todo offline msg
         return true
     }

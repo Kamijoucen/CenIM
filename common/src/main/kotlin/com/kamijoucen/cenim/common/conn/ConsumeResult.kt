@@ -4,5 +4,4 @@ import java.io.Serializable
 
 
 class ConsumeResult(val success: Boolean,
-                    val next: Boolean,
-                    val connId: Serializable? = null)
+                    val next: Boolean)

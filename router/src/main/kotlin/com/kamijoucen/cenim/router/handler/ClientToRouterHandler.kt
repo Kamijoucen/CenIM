@@ -4,7 +4,6 @@ import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.router.manager.RouterContext
 import com.kamijoucen.cenim.router.util.AckSender
 import com.kamijoucen.cenim.router.util.MsgSender
-import com.kamijoucen.cenim.router.domain.ClientToRouterConn
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import org.apache.commons.logging.LogFactory
@@ -33,22 +32,13 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
         checkDest(msg)
 
         // parse msg
-        val process = connContext.routerMsgProcessManager.getRequestParse(msg.header.bodyType)
+        val process = connContext.routerMsgProcessManager.getRequestProcess(msg.header.bodyType)
         if (process == null) {
             msgSender.sendMsg(msg)
             return
         }
         val result = process.accept(msg, ctx)
-        if (!result.success) {
-            return
-        }
-        if (result.connId != null) {
-            val conn = connContext.routerToServiceServerConnManager.getConn(result.connId!!)
-                    ?: return
-            msgSender.sendMsg(msg, conn)
-            return
-        }
-        if (result.next) {
+        if (result.success && result.next) {
             msgSender.sendMsg(msg)
         }
     }
