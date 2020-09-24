@@ -16,6 +16,6 @@ class ServiceContext {
     lateinit var routerClientToServiceConnManager: RouterClientToServiceConnManager
 
     @Autowired
-    lateinit var msgParseManager: ServiceMsgParseManager
+    lateinit var msgProcessManager: ServiceMsgProcessManager
 
 }

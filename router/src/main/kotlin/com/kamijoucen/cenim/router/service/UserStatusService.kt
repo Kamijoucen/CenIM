@@ -4,7 +4,7 @@ import com.kamijoucen.cenim.common.util.ChCtx
 import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.router.domain.ClientToRouterConn
 import com.kamijoucen.cenim.router.manager.RouterContext
-import com.kamijoucen.cenim.router.util.MappingKeyGenerator
+import com.kamijoucen.cenim.common.util.MappingKeyGenerator
 import com.kamijoucen.cenim.router.util.MsgSender
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component

@@ -1,5 +1,6 @@
 package com.kamijoucen.cenim.router.util
 
+import com.kamijoucen.cenim.common.util.MappingKeyGenerator
 import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.router.manager.RouterContext
 import com.kamijoucen.cenim.router.domain.RouterToServiceServerConn
@@ -19,8 +20,8 @@ class MsgSender {
         val netId = routerContext.cacheManager.get(MappingKeyGenerator.userToServiceKey(msg.header.destId.toString()))
         if (netId != null) {
             val conn = routerContext.routerToServiceServerConnManager.getConn(netId)
-            if (conn != null && conn.getCtx().channel().isOpen) {
-                conn.getCtx().channel().writeAndFlush(msg)
+            if (conn != null) {
+                sendMsg(msg, conn)
             } else {
                 log.error("router to service conn not fount! netId:${netId}")
             }
