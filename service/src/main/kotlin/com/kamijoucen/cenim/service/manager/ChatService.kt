@@ -16,11 +16,12 @@ class ChatService {
     private lateinit var serviceContext: ServiceContext
 
     fun doChat(msg: Message) {
-        val netId = serviceContext.cacheManager.get(MappingKeyGenerator.userToServiceKey(msg.header.destId.toString()))
+        val key = MappingKeyGenerator.routerToService(msg.header.destId.toString())
+        val netId = serviceContext.cacheManager.get(key)
                 ?: return
         val conn = serviceContext.routerClientToServiceConnManager.getConn(netId)
         if (conn == null) {
-            serviceContext.cacheManager.del(MappingKeyGenerator.userToServiceKey(msg.header.destId.toString()))
+            serviceContext.cacheManager.del(key)
             // todo put offline msg
             return
         }

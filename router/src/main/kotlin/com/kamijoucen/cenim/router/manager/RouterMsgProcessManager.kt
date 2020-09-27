@@ -11,21 +11,17 @@ class RouterMsgProcessManager {
 
     private val log = LogFactory.getLog("RouterMsgProcessManager")
 
-    private val requestProcess = HashMap<Int, IMConsumer>()
-
-    private val responseProcess = HashMap<Int, IMConsumer>()
+    private val process = HashMap<Int, IMConsumer>()
 
     init {
         MessageBodyType.values().forEach {
             when (it.type) {
-                MessageBodyType.ONLINE_MSG.type -> requestProcess[it.type] = onlineMsgProcess()
+                MessageBodyType.ONLINE_MSG.type -> process[it.type] = onlineMsgProcess()
                 else -> log.warn("msg type not have process! type:${it.type}")
             }
         }
     }
 
-    fun getRequestProcess(type: Int) = requestProcess[type]
-
-    fun getResponseProcess(type: Int) = responseProcess[type]
+    fun getProcess(type: Int) = process[type]
 
 }

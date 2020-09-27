@@ -1,6 +1,7 @@
 package com.kamijoucen.cenim.router.handler
 
 import com.kamijoucen.cenim.message.msg.Message
+import com.kamijoucen.cenim.router.domain.ClientToRouterConn
 import com.kamijoucen.cenim.router.manager.RouterContext
 import com.kamijoucen.cenim.router.util.AckSender
 import com.kamijoucen.cenim.router.util.MsgSender
@@ -27,19 +28,15 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
         // send ack msg
         ackSender.ack(msg, ctx)
-
         checkFrom(msg)
         checkDest(msg)
-
         // parse msg
-        val process = connContext.routerMsgProcessManager.getRequestProcess(msg.header.bodyType)
-        if (process == null) {
+        val result = connContext.routerMsgProcessManager.getProcess(msg.header.bodyType)
+                ?.accept(msg, ctx)
+        if (result == null || result.success) {
             msgSender.sendMsg(msg)
-            return
-        }
-        val result = process.accept(msg, ctx)
-        if (result.success && result.next) {
-            msgSender.sendMsg(msg)
+        } else {
+            TODO("log...")
         }
     }
 
@@ -48,11 +45,11 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
 //    }
 
     override fun channelInactive(ctx: ChannelHandlerContext) {
-        try {
-//            TODO("reconnect")
-        } catch (ex: Exception) {
-            connContext.routerToServiceServerConnManager.removeConn(ctx)
-        }
+        connContext.clientToRouterConnManager.removeConn(ctx)
+    }
+
+    override fun channelActive(ctx: ChannelHandlerContext) {
+        connContext.clientToRouterConnManager.addConn(ClientToRouterConn(ctx))
     }
 
     fun checkFrom(msg: Message): Boolean {

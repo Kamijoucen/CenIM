@@ -17,22 +17,19 @@ class MsgSender {
     private lateinit var routerContext: RouterContext
 
     fun sendMsg(msg: Message) {
-        val netId = routerContext.cacheManager.get(MappingKeyGenerator.userToServiceKey(msg.header.destId.toString()))
-        if (netId != null) {
-            val conn = routerContext.routerToServiceServerConnManager.getConn(netId)
-            if (conn != null) {
-                sendMsg(msg, conn)
-            } else {
-                log.error("router to service conn not fount! netId:${netId}")
-            }
+        val conn = routerContext.routerToServiceServerConnManager.getConn()
+        if (conn != null) {
+            sendMsg(msg, conn)
         } else {
-            log.error("user to service mapping not fount! netId:${netId}")
+            log.error("router to service conn not fount!")
         }
     }
 
     fun sendMsg(msg: Message, conn: RouterToServiceServerConn) {
         if (conn.getCtx().channel().isOpen) {
             conn.getCtx().channel().writeAndFlush(msg)
+        } else {
+            TODO()
         }
     }
 }

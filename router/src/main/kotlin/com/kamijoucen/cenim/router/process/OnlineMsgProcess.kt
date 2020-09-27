@@ -8,5 +8,5 @@ import com.kamijoucen.cenim.router.service.UserStatusService
 internal fun onlineMsgProcess() = IMConsumer { msg, ctx ->
     val userStatusService = ContextUtil.getBean(UserStatusService::class.java)
     val success = userStatusService.online(msg, ctx)
-    return@IMConsumer ConsumeResult(success, next = false)
+    return@IMConsumer ConsumeResult(success)
 }

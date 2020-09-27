@@ -15,7 +15,7 @@ abstract class AbstractMemoryConnManager<C : IMConn> : ImConnManager<C> {
     }
 
     override fun getConn(ctx: ChannelHandlerContext): C? {
-        TODO("Not yet implemented")
+        return getConn(ctx.channel().attr(IMConn.NET_ID).get())
     }
 
     override fun getConn(netId: Serializable): C? {
