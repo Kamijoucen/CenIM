@@ -15,10 +15,10 @@ abstract class AbstractMemoryConnManager<C : IMConn> : ImConnManager<C> {
     }
 
     override fun getConn(ctx: ChannelHandlerContext): C? {
-        return getConn(ctx.channel().attr(IMConn.NET_ID).get())
+        return getConn(ctx.channel().attr(IMConn.NET_ID).get().toString())
     }
 
-    override fun getConn(netId: Serializable): C? {
+    override fun getConn(netId: String): C? {
         return connMap[netId]
     }
 
@@ -34,7 +34,7 @@ abstract class AbstractMemoryConnManager<C : IMConn> : ImConnManager<C> {
         return conn
     }
 
-    override fun removeConn(netId: Serializable): C? {
+    override fun removeConn(netId: String): C? {
         return connMap.remove(netId)
     }
 

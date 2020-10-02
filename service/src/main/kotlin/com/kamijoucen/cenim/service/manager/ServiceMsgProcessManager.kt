@@ -12,18 +12,17 @@ class ServiceMsgProcessManager {
 
     private val log = LogFactory.getLog("ServiceMsgParseManager")
 
-    private val requestProcessMap = ConcurrentHashMap<Int, IMConsumer>()
+    private val processMap = ConcurrentHashMap<Int, IMConsumer>()
 
     init {
         MessageBodyType.values().forEach {
             when (it.type) {
                 MessageBodyType.ONLINE_MSG.type ->
-                    requestProcessMap[MessageBodyType.ONLINE_MSG.type] = onlineMsgProcess()
+                    processMap[MessageBodyType.ONLINE_MSG.type] = onlineMsgProcess()
             }
         }
-
     }
 
-    fun getRequestProcess(type: Int) = requestProcessMap[type]
+    fun getProcess(type: Int) = processMap[type]
 
 }

@@ -21,6 +21,7 @@ class ChatService {
                 ?: return
         val conn = serviceContext.routerClientToServiceConnManager.getConn(netId)
         if (conn == null) {
+            println("------- ${msg.header.destId} not online")
             serviceContext.cacheManager.del(key)
             // todo put offline msg
             return

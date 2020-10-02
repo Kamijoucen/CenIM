@@ -28,12 +28,9 @@ private fun startClient(host: String, port: String) {
     val bootstrap = Bootstrap()
     bootstrap.channel(NioSocketChannel::class.java).group(NioEventLoopGroup())
     try {
-        bootstrap.handler(object : ChannelInitializer<NioSocketChannel?>() {
+        bootstrap.handler(object : ChannelInitializer<NioSocketChannel>() {
             @Throws(Exception::class)
-            override fun initChannel(ch: NioSocketChannel?) {
-                if (ch == null) {
-                    return
-                }
+            override fun initChannel(ch: NioSocketChannel) {
                 val pipeline: ChannelPipeline = ch.pipeline()
                 pipeline.addLast(MessageFrameDecoder())
                 pipeline.addLast(MessageFrameEncoder())

@@ -7,7 +7,7 @@ import java.io.Serializable
 interface IMConn {
 
     companion object {
-        val NET_ID = AttributeKey.valueOf<Serializable>("netId")
+        val NET_ID = AttributeKey.valueOf<Serializable>("netId")!!
     }
 
     fun getId(): Serializable

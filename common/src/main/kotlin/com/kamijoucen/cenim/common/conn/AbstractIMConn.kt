@@ -9,7 +9,7 @@ abstract class AbstractIMConn(private val context: ChannelHandlerContext) : IMCo
     private val netId: Serializable
 
     init {
-        this.netId = IdGenerator.nextId()
+        this.netId = IdGenerator.nextId().toString()
         this.context.channel().attr(IMConn.NET_ID).set(netId)
     }
 

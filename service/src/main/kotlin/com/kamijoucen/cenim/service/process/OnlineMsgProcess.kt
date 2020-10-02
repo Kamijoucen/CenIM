@@ -14,5 +14,5 @@ internal fun onlineMsgProcess() = IMConsumer { msg, ctx ->
                 MappingKeyGenerator.routerToService(msg.body.execute().getContent()),
                 conn.getId())
     }
-    return@IMConsumer ConsumeResult(true)
+    return@IMConsumer ConsumeResult(true, next = false)
 }

@@ -5,6 +5,7 @@ import com.kamijoucen.cenim.router.domain.ClientToRouterConn
 import com.kamijoucen.cenim.router.manager.RouterContext
 import com.kamijoucen.cenim.router.util.AckSender
 import com.kamijoucen.cenim.router.util.MsgSender
+import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import org.apache.commons.logging.LogFactory
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
+@ChannelHandler.Sharable
 class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
 
     private val log = LogFactory.getLog("ClientToRouterHandler")
@@ -31,12 +33,18 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
         checkFrom(msg)
         checkDest(msg)
         // parse msg
-        val result = connContext.routerMsgProcessManager.getProcess(msg.header.bodyType)
-                ?.accept(msg, ctx)
-        if (result == null || result.success) {
-            msgSender.sendMsg(msg)
+        val process = connContext.routerMsgProcessManager.getProcess(msg.header.bodyType)
+        if (process != null) {
+            val result = process.accept(msg, ctx)
+            if (!result.success) {
+                log.error("msg process error")
+                return
+            }
+            if (result.next) {
+                msgSender.sendMsg(msg)
+            }
         } else {
-            TODO("log...")
+            msgSender.sendMsg(msg)
         }
     }
 

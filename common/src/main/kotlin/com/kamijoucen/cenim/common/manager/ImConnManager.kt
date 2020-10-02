@@ -10,13 +10,13 @@ interface ImConnManager<C : IMConn> {
 
     fun getConn(ctx: ChannelHandlerContext): C?
 
-    fun getConn(netId: Serializable): C?
+    fun getConn(netId: String): C?
 
     fun randomConn(): C?
 
     fun addConn(conn: C): C
 
-    fun removeConn(netId: Serializable): C?
+    fun removeConn(netId: String): C?
 
     fun removeConn(ctx: ChannelHandlerContext): C?
 

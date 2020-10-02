@@ -1,14 +1,17 @@
 package com.kamijoucen.cenim.router.handler
 
+import com.kamijoucen.cenim.common.util.JsonUtil
 import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.router.domain.RouterToServiceServerConn
 import com.kamijoucen.cenim.router.manager.RouterContext
+import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
+@ChannelHandler.Sharable
 class RouterToServiceHandler : SimpleChannelInboundHandler<Message>() {
 
     @Autowired
@@ -31,6 +34,6 @@ class RouterToServiceHandler : SimpleChannelInboundHandler<Message>() {
     }
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
-
+        println("RouterToServiceHandler =========\t" + JsonUtil.toJson(msg))
     }
 }
