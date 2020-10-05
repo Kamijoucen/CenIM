@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 
 object MsgUtil {
 
-    private val log = LogFactory.getLog("MsgUtil")
+    private val log = LogFactory.getLog("RouterMsgUtil")
 
     fun sendMsg(msg: Message, conn: IMConn) {
         if (conn.getCtx().channel().isOpen) {

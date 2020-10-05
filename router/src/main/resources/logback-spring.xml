@@ -71,6 +71,6 @@
     -->
     <root level="all">
         <appender-ref ref="stdout"/>
-<!--        <appender-ref ref="appLogAppender"/>-->
+        <appender-ref ref="appLogAppender"/>
     </root>
 </configuration>

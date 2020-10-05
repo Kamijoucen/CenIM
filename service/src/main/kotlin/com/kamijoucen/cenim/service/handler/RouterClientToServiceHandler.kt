@@ -2,9 +2,8 @@ package com.kamijoucen.cenim.service.handler
 
 import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.service.domain.RouterClientToServiceConn
-import com.kamijoucen.cenim.service.manager.ChatService
+import com.kamijoucen.cenim.service.manager.MsgService
 import com.kamijoucen.cenim.service.manager.ServiceContext
-import com.kamijoucen.cenim.service.util.MsgSender
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
@@ -23,10 +22,7 @@ class RouterClientToServiceHandler : SimpleChannelInboundHandler<Message>() {
     private lateinit var serviceContext: ServiceContext
 
     @Autowired
-    private lateinit var chatService: ChatService
-
-    @Autowired
-    private lateinit var msgSender: MsgSender
+    private lateinit var msgService: MsgService
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
 //        msgSender.ack(msg.header.msgId, ctx)
@@ -34,7 +30,7 @@ class RouterClientToServiceHandler : SimpleChannelInboundHandler<Message>() {
         val process = serviceContext.msgProcessManager.getProcess(msg.header.bodyType)
 
         if (process == null) {
-            chatService.doChat(msg)
+            msgService.transferMsg(msg)
             return
         }
         val result = process.accept(msg, ctx)
@@ -43,7 +39,7 @@ class RouterClientToServiceHandler : SimpleChannelInboundHandler<Message>() {
             return
         }
         if (result.next) {
-            chatService.doChat(msg)
+            msgService.transferMsg(msg)
         }
     }
 
