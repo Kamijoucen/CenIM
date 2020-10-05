@@ -16,16 +16,13 @@ class UserStatusService {
 
     fun online(msg: Message, ctx: ChCtx): Boolean {
         val userId = msg.body.execute().getContent()
-        val clientConn = context.clientToRouterConnManager.getConn(ctx)
-        if (clientConn != null) {
-            // todo 考虑在集群环境下，client可能连接到多个router，这里后期要做处理
-            // 将client到router的映射记录入缓存
-            context.cacheManager.set(
-                    MappingKeyGenerator.clientToUser(userId),
-                    clientConn.getId())
-        } else {
-            TODO()
+
+        val clientConn = ClientToRouterConn(ctx).let {
+            context.clientToRouterConnManager.addConn(it)
         }
+        context.cacheManager.set(
+                MappingKeyGenerator.clientToUser(userId),
+                clientConn.getId())
         // todo offline msg
         return true
     }

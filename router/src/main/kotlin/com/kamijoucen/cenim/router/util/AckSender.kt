@@ -12,12 +12,9 @@ import org.springframework.stereotype.Component
 @Component
 class AckSender {
 
-    @Autowired
-    private lateinit var msgAnswer: MsgAnswer
-
     fun ack(msg: Message, ctx: ChCtx) {
         val ack = getAck(msg.header.msgId)
-        msgAnswer.answerMsg(ack, ctx)
+        MsgUtil.sendMsg(ack, ctx)
     }
 
     private fun getAck(srcId: Long): Message {

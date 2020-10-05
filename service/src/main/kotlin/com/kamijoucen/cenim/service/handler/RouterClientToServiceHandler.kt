@@ -29,19 +29,20 @@ class RouterClientToServiceHandler : SimpleChannelInboundHandler<Message>() {
     private lateinit var msgSender: MsgSender
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
-        msgSender.ack(msg.header.msgId, ctx)
+//        msgSender.ack(msg.header.msgId, ctx)
 
         val process = serviceContext.msgProcessManager.getProcess(msg.header.bodyType)
-        if (process != null) {
-            val result = process.accept(msg, ctx)
-            if (!result.success) {
-                log.error("msg process error")
-                return
-            }
-            if (result.next) {
-                chatService.doChat(msg)
-            }
-        } else {
+
+        if (process == null) {
+            chatService.doChat(msg)
+            return
+        }
+        val result = process.accept(msg, ctx)
+        if (!result.success) {
+            log.error("msg process error")
+            return
+        }
+        if (result.next) {
             chatService.doChat(msg)
         }
     }
