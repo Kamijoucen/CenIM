@@ -17,6 +17,11 @@ class MsgService {
      * 将消息随机发送到某个 service 节点（service层是无状态的）
      */
     fun sendMsg(msg: Message) {
+
+        // todo 如果目标登陆在本地，则不进行转发
+//        val destId = msg.header.destId
+//        routerContext.clientToRouterConnManager.getConn()
+
         val conn = routerContext.routerToServiceServerConnManager.getConn()
         if (conn != null) {
             MsgUtil.sendMsg(msg, conn)

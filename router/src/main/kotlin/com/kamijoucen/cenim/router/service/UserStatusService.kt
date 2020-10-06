@@ -7,6 +7,7 @@ import com.kamijoucen.cenim.router.manager.RouterContext
 import com.kamijoucen.cenim.common.util.MappingKeyGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class UserStatusService {
@@ -23,6 +24,10 @@ class UserStatusService {
         context.cacheManager.set(
                 MappingKeyGenerator.clientToUser(userId),
                 clientConn.getId())
+        // 初始化历史记录
+        context.chatHistoryManager.init(userId.toLong())
+        context.chatHistoryManager.setHistory(userId.toLong(), msg)
+
         // todo offline msg
         return true
     }

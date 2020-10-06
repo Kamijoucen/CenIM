@@ -1,5 +1,11 @@
 package com.kamijoucen.cenim.common.domain
 
-class IMUser {
+interface IMUser {
+
+    val id: Long
+
+    var name: String
+
+    var status: Int
 
 }
