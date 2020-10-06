@@ -24,4 +24,7 @@ class RouterContext {
     @Autowired
     lateinit var chatHistoryManager: ChatHistoryManager
 
+    @Autowired
+    lateinit var userManager: UserManager
+
 }

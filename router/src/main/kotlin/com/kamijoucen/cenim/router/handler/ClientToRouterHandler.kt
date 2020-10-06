@@ -1,9 +1,8 @@
 package com.kamijoucen.cenim.router.handler
 
 import com.kamijoucen.cenim.message.msg.Message
-import com.kamijoucen.cenim.router.domain.ClientToRouterConn
 import com.kamijoucen.cenim.router.manager.RouterContext
-import com.kamijoucen.cenim.router.service.MsgService
+import com.kamijoucen.cenim.router.service.UserChatService
 import com.kamijoucen.cenim.router.util.AckSender
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
@@ -22,7 +21,7 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
     private lateinit var connContext: RouterContext
 
     @Autowired
-    private lateinit var msgService: MsgService
+    private lateinit var chatService: UserChatService
 
     @Autowired
     private lateinit var ackSender: AckSender
@@ -38,13 +37,9 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
             val result = process.accept(msg, ctx)
             if (!result.success) {
                 log.error("msg process error")
-                return
-            }
-            if (result.next) {
-                msgService.sendMsg(msg)
             }
         } else {
-            msgService.sendMsg(msg)
+            chatService.senMsg(msg)
         }
     }
 

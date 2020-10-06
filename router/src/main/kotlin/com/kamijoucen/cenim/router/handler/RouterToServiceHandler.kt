@@ -3,7 +3,7 @@ package com.kamijoucen.cenim.router.handler
 import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.router.domain.RouterToServiceServerConn
 import com.kamijoucen.cenim.router.manager.RouterContext
-import com.kamijoucen.cenim.router.service.MsgService
+import com.kamijoucen.cenim.router.service.UserChatService
 import com.kamijoucen.cenim.router.util.AckSender
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
@@ -22,7 +22,7 @@ class RouterToServiceHandler : SimpleChannelInboundHandler<Message>() {
     private lateinit var ackSender: AckSender
 
     @Autowired
-    private lateinit var msgService: MsgService
+    private lateinit var chatService: UserChatService
 
     @Autowired
     lateinit var connContext: RouterContext
@@ -46,6 +46,6 @@ class RouterToServiceHandler : SimpleChannelInboundHandler<Message>() {
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
         // TODO: 2020/10/5 ACK
 
-        msgService.receiveMsg(msg)
+        chatService.receiveMsg(msg)
     }
 }
