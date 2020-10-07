@@ -44,7 +44,7 @@ fun MessageBodyType.Companion.fromType(type: Int): MessageBodyType {
     return getMessageType { opTypeMessage: MessageBodyType -> opTypeMessage.type == type }
 }
 
-fun MessageBodyType.Companion.fromOperation(messageBody: MessageBody): MessageBodyType {
+fun MessageBodyType.Companion.fromBody(messageBody: MessageBody): MessageBodyType {
     return getMessageType { opTypeMessage: MessageBodyType -> opTypeMessage.bodyClass == messageBody.javaClass }
 }
 

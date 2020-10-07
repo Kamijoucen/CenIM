@@ -11,8 +11,11 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
+import io.netty.util.concurrent.UnorderedThreadPoolEventExecutor
 
 fun startServiceServer(config: ServiceConfig): Boolean {
+    val executor = UnorderedThreadPoolEventExecutor(
+            Runtime.getRuntime().availableProcessors() * 2)
     val bootstrap = ServerBootstrap()
             .group(NioEventLoopGroup(), NioEventLoopGroup())
             .channel(NioServerSocketChannel::class.java)
@@ -24,7 +27,7 @@ fun startServiceServer(config: ServiceConfig): Boolean {
                             .addLast("frameEncode", MessageFrameEncoder())
                             .addLast("protocolDecode", MessageProtocolDecoder())
                             .addLast("protocolEncode", MessageProtocolEncoder())
-                            .addLast("messageHandler", ContextUtil.getBean(RouterClientToServiceHandler::class.java))
+                            .addLast(executor, "messageHandler", ContextUtil.getBean(RouterClientToServiceHandler::class.java))
                 }
             })
     bootstrap.bind(config.port).sync()

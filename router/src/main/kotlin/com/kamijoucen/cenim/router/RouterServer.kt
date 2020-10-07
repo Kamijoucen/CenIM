@@ -11,14 +11,15 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
+import io.netty.util.concurrent.UnorderedThreadPoolEventExecutor
 
 fun startRouterServer(config: RouterConfig): Boolean {
 
-    val bossGroup = NioEventLoopGroup()
-    val workGroup = NioEventLoopGroup()
+    val executor = UnorderedThreadPoolEventExecutor(
+            Runtime.getRuntime().availableProcessors() * 2)
 
     val bootstrap = ServerBootstrap()
-            .group(bossGroup, workGroup)
+            .group(NioEventLoopGroup(), NioEventLoopGroup())
             .channel(NioServerSocketChannel::class.java)
             .childHandler(object : ChannelInitializer<NioSocketChannel>() {
                 @Throws(Exception::class)
@@ -28,7 +29,7 @@ fun startRouterServer(config: RouterConfig): Boolean {
                             .addLast("frameEncode", MessageFrameEncoder())
                             .addLast("protocolDecode", MessageProtocolDecoder())
                             .addLast("protocolEncode", MessageProtocolEncoder())
-                            .addLast("messageHandler", ContextUtil.getBean(ClientToRouterHandler::class.java))
+                            .addLast(executor, "messageHandler", ContextUtil.getBean(ClientToRouterHandler::class.java))
                 }
             })
 
