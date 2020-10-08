@@ -13,9 +13,12 @@ class ResponseDispatcherHandler(private val ackManager: AckWindowManager)
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
         if (msg.header.bodyType == MessageBodyType.ACK_MSG.type) {
-            ackManager.set(msg.header.msgId, msg)
+            ackManager.set(msg.body.execute().getContent().toLong(), msg)
             return
         }
+
+
+
     }
 
 }

@@ -28,7 +28,7 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
         // send ack msg
-//        ackSender.ack(msg, ctx)
+        ackSender.ack(msg, ctx)
         checkFrom(msg)
         checkDest(msg)
         // parse msg

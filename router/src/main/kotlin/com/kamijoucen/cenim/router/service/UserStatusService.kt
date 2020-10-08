@@ -15,7 +15,7 @@ class UserStatusService {
     @Autowired
     lateinit var context: RouterContext
 
-    fun online(msg: Message, ctx: ChCtx): UserImpl {
+    fun connect(msg: Message, ctx: ChCtx): UserImpl {
         val userId = msg.body.execute().getContent()
         // todo select user to db
         val user = UserImpl(userId.toLong(), "user+${userId}", -1)

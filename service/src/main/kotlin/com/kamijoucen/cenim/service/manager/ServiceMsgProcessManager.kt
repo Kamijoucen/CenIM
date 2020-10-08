@@ -2,7 +2,7 @@ package com.kamijoucen.cenim.service.manager
 
 import com.kamijoucen.cenim.message.msg.util.IMConsumer
 import com.kamijoucen.cenim.message.msg.*
-import com.kamijoucen.cenim.service.process.onlineMsgProcess
+import com.kamijoucen.cenim.service.process.connectMsgProcess
 import org.apache.commons.logging.LogFactory
 import org.springframework.stereotype.Component
 import java.util.concurrent.ConcurrentHashMap
@@ -17,8 +17,8 @@ class ServiceMsgProcessManager {
     init {
         MessageBodyType.values().forEach {
             when (it.type) {
-                MessageBodyType.ONLINE_MSG.type ->
-                    processMap[MessageBodyType.ONLINE_MSG.type] = onlineMsgProcess()
+                MessageBodyType.CONNECT_MSG.type ->
+                    processMap[MessageBodyType.CONNECT_MSG.type] = connectMsgProcess()
             }
         }
     }

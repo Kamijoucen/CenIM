@@ -3,8 +3,8 @@ package com.kamijoucen.cenim.message.msg
 import com.kamijoucen.cenim.message.msg.body.CustomMessageBody
 import com.kamijoucen.cenim.message.msg.body.StringMessageBody
 import com.kamijoucen.cenim.message.msg.body.StringMessageResult
-import com.kamijoucen.cenim.message.msg.body.OnlineMessageBody
-import com.kamijoucen.cenim.message.msg.body.OnlineMessageResult
+import com.kamijoucen.cenim.message.msg.body.ConnectMessageBody
+import com.kamijoucen.cenim.message.msg.body.ConnectMessageResult
 import com.kamijoucen.cenim.message.msg.body.AckMessageBody
 import com.kamijoucen.cenim.message.msg.body.AckMessageResult
 
@@ -23,9 +23,9 @@ enum class MessageBodyType(val type: Int,
      */
     CUSTOM_MSG(2, CustomMessageBody::class.java, StringMessageResult::class.java),
     /**
-     * @property ONLINE_MSG 上线消息
+     * @property CONNECT_MSG 上线消息
      */
-    ONLINE_MSG(3, OnlineMessageBody::class.java, OnlineMessageResult::class.java),
+    CONNECT_MSG(3, ConnectMessageBody::class.java, ConnectMessageResult::class.java),
     /**
      * @property ACK_MSG ack消息
      */

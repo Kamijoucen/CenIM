@@ -1,6 +1,6 @@
 package com.kamijoucen.cenim.client.manager
 
-import com.kamijoucen.cenim.client.AckWindow
+import com.kamijoucen.cenim.client.domain.AckWindow
 import com.kamijoucen.cenim.message.msg.Message
 import java.util.concurrent.ConcurrentHashMap
 

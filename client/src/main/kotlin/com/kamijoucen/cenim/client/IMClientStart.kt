@@ -1,5 +1,6 @@
-package com.kamijoucen.cenim.client.domain
+package com.kamijoucen.cenim.client
 
+import com.kamijoucen.cenim.client.domain.IMHost
 import com.kamijoucen.cenim.client.handler.ResponseDispatcherHandler
 import com.kamijoucen.cenim.message.codec.MessageFrameDecoder
 import com.kamijoucen.cenim.message.codec.MessageFrameEncoder

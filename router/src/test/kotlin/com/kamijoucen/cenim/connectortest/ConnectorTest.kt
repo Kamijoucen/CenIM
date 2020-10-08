@@ -10,8 +10,7 @@ import com.kamijoucen.cenim.message.codec.MessageProtocolEncoder
 import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.message.msg.MessageHeader
 import com.kamijoucen.cenim.message.msg.MessageBodyType
-import com.kamijoucen.cenim.message.msg.body.CustomMessageBody
-import com.kamijoucen.cenim.message.msg.body.OnlineMessageBody
+import com.kamijoucen.cenim.message.msg.body.ConnectMessageBody
 import com.kamijoucen.cenim.message.msg.body.StringMessageBody
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelFuture
@@ -62,8 +61,8 @@ class RouterTest {
 //        val header = MessageHeader(1, MessageBodyType.STRING_MSG.type, 11, 22, 33)
 //        val requestMessage = Message(header, operation)
 
-        val body = OnlineMessageBody("11")
-        val header = MessageHeader(1, MessageBodyType.ONLINE_MSG.type, -1, -1, 33)
+        val body = ConnectMessageBody("11")
+        val header = MessageHeader(1, MessageBodyType.CONNECT_MSG.type, -1, -1, 33)
         val requestMessage = Message(header, body)
 
         val body2 = StringMessageBody("李思陈测试数据")

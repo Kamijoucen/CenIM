@@ -6,7 +6,7 @@ import com.kamijoucen.cenim.common.util.ContextUtil
 import com.kamijoucen.cenim.common.util.MappingKeyGenerator
 import com.kamijoucen.cenim.service.manager.ServiceContext
 
-internal fun onlineMsgProcess() = IMConsumer { msg, ctx ->
+internal fun connectMsgProcess() = IMConsumer { msg, ctx ->
     val context = ContextUtil.getBean(ServiceContext::class.java)
     val conn = context.routerClientToServiceConnManager.getConn(ctx)
     if (conn != null) {
