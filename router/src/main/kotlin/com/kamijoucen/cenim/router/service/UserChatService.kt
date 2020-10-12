@@ -20,10 +20,9 @@ class UserChatService {
      * @param msg 待发送的消息
      */
     fun senMsg(msg: Message) {
-        routerContext.userManager.get(msg.header.fromId)?.waitConnect().let {
-            if (it != true) {
-                TODO("offline ..")
-            }
+        val user = routerContext.userManager.get(msg.header.fromId)
+        if (user?.isConnect() == false) {
+            TODO("put offline msg")
         }
         routerContext.chatHistoryManager.setHistory(msg.header.fromId, msg)
         val destUser = routerContext.userManager.get(msg.header.destId)

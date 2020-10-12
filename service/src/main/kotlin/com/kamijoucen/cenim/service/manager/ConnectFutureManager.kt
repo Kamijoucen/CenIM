@@ -11,6 +11,15 @@ class ConnectFutureManager {
 
     fun waitConnect(id: Long) = connectFutureManager[id]?.get()
 
+    fun isConnect(id: Long): Boolean {
+        val future = connectFutureManager[id]
+        return if (future == null) {
+            false
+        } else {
+            future.get()
+        }
+    }
+
     fun set(id: Long, future: UserConnectFuture) {
         connectFutureManager[id] = future
     }

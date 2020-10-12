@@ -13,6 +13,9 @@ class MsgService {
     private lateinit var serviceContext: ServiceContext
 
     fun transferMsg(msg: Message) {
+        if (!serviceContext.connectFutureManager.isConnect(msg.header.fromId)) {
+            TODO("put offline msg")
+        }
         val key = MappingKeyGenerator.routerToService(msg.header.destId.toString())
         val netId = serviceContext.cacheManager.get(key) ?: return
         val conn = serviceContext.routerClientToServiceConnManager.getConn(netId)
