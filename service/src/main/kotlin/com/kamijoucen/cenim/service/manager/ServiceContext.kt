@@ -18,4 +18,7 @@ class ServiceContext {
     @Autowired
     lateinit var msgProcessManager: ServiceMsgProcessManager
 
+    @Autowired
+    lateinit var connectFutureManager: ConnectFutureManager
+
 }

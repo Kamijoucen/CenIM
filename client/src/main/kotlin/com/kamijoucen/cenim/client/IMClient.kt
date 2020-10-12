@@ -8,10 +8,8 @@ import com.kamijoucen.cenim.client.manager.AckWindowManager
 import com.kamijoucen.cenim.client.manager.MsgProcessManager
 import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.message.msg.MessageBody
-import com.kamijoucen.cenim.message.msg.MessageBodyType
 import com.kamijoucen.cenim.message.msg.body.ConnectMessageBody
 import com.kamijoucen.cenim.message.msg.util.MessageFactory
-import io.netty.channel.ChannelFactory
 import io.netty.channel.ChannelFuture
 
 class IMClient(private val param: LoginParam,

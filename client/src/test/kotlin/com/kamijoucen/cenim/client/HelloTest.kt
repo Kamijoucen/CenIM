@@ -13,11 +13,11 @@ import kotlin.contracts.contract
 
 class HelloTest {
 
-    fun getProcesses(): MsgProcessManager {
+    fun getProcesses(fname: String): MsgProcessManager {
         val msgProcessManager = MsgProcessManager()
 
         msgProcessManager.register(MessageBodyType.STRING_MSG) {
-            println("收到响应数据")
+            println("我是-----\t${fname}")
             println("============================ " + JsonUtil.toJson(it))
         }
 
@@ -30,9 +30,20 @@ class HelloTest {
         val loginParam = LoginParam(11)
         val host = IMHost("127.0.0.1", "5238")
 
-        val client = IMClient(loginParam, host, getProcesses())
+        val client = IMClient(loginParam, host, getProcesses("11"))
         client.connect()
-        client.sendMsg(11, StringMessageBody("李思岑测试"))
+        client.sendMsg(22, StringMessageBody("李思岑测试"))
+        client.syncClose()
+    }
+
+    @Test
+    fun test2() {
+
+        val loginParam = LoginParam(22)
+        val host = IMHost("127.0.0.1", "5238")
+
+        val client = IMClient(loginParam, host, getProcesses("22"))
+        client.connect()
         client.syncClose()
     }
 

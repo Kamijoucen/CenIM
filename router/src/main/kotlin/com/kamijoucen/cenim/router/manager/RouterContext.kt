@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 class RouterContext {
 
     @Autowired
-    @Qualifier("memoryCacheManager")
+    @Qualifier("redisCacheManager")
     lateinit var cacheManager: ICacheManager
 
     @Autowired

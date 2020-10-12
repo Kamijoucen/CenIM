@@ -51,6 +51,10 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
         connContext.clientToRouterConnManager.removeConn(ctx)
     }
 
+    override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
+        log.error(cause.message, cause)
+    }
+
     fun checkFrom(msg: Message): Boolean {
         return false
     }

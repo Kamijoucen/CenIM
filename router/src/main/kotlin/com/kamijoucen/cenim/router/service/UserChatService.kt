@@ -20,11 +20,12 @@ class UserChatService {
      * @param msg 待发送的消息
      */
     fun senMsg(msg: Message) {
-        try {
-            routerContext.chatHistoryManager.setHistory(msg.header.fromId, msg)
-        } catch (ex: HistoryNotFoundException) {
-            TODO("offline")
+        routerContext.userManager.get(msg.header.fromId)?.waitConnect().let {
+            if (it != true) {
+                TODO("offline ..")
+            }
         }
+        routerContext.chatHistoryManager.setHistory(msg.header.fromId, msg)
         val destUser = routerContext.userManager.get(msg.header.destId)
         // 如果目标用户登陆在本节点则不进行转发消息
         if (destUser != null) {

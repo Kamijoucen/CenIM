@@ -32,6 +32,8 @@ class UserStatusService {
         // 初始化历史记录
         context.chatHistoryManager.init(userId.toLong())
         context.chatHistoryManager.setHistory(userId.toLong(), msg)
+        // 标记用户已经连接服务器，此时才可以正常收发消息
+        user.connect()
         // todo offline msg
         return user
     }
