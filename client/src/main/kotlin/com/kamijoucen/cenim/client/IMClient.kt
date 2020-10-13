@@ -8,6 +8,8 @@ import com.kamijoucen.cenim.client.manager.AckWindowManager
 import com.kamijoucen.cenim.client.manager.MsgProcessManager
 import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.message.msg.MessageBody
+import com.kamijoucen.cenim.message.msg.body.AckMessageResult
+import com.kamijoucen.cenim.message.msg.body.AckMsgBody
 import com.kamijoucen.cenim.message.msg.body.ConnectMessageBody
 import com.kamijoucen.cenim.message.msg.util.MessageFactory
 import io.netty.channel.ChannelFuture
@@ -20,9 +22,9 @@ class IMClient(private val param: LoginParam,
     private val ackManager: AckWindowManager = AckWindowManager()
     private val msgFactory: MessageFactory = MessageFactory(param.userId)
 
-    fun connect() {
+    fun connect() : AckMessageResult {
         this.channelFuture = startClient(host, ResponseDispatcherHandler(ackManager, processes))
-        val msg = sendMsg(-1, ConnectMessageBody(param.userId.toString())).get()
+        return sendMsg(-1, ConnectMessageBody(param.userId.toString())).get().body.execute() as AckMessageResult
     }
 
     fun sendMsg(destId: Long, body: MessageBody): AckWindow {
