@@ -33,7 +33,7 @@ enum class MessageBodyType(val type: Int,
     /**
      * @property INTERNAL_MSG 内部消息
      */
-    INTERNAL_MSG(4, AckMessageBody::class.java, AckMessageResult::class.java),
+    INTERNAL_MSG(5, AckMessageBody::class.java, AckMessageResult::class.java),
     ;
 
     companion object {}

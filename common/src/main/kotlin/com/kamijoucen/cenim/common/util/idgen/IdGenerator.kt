@@ -1,4 +1,4 @@
-package com.kamijoucen.cenim.common.util
+package com.kamijoucen.cenim.common.util.idgen
 
 import kotlin.random.Random
 

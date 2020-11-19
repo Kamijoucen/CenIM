@@ -24,7 +24,8 @@ class IMClient(private val param: LoginParam,
 
     fun connect() : AckMessageResult {
         this.channelFuture = startClient(host, ResponseDispatcherHandler(ackManager, processes))
-        return sendMsg(-1, ConnectMessageBody(param.userId.toString())).get().body.execute() as AckMessageResult
+        return sendMsg(-1, ConnectMessageBody(param.userId.toString()))
+                .get().body.execute() as AckMessageResult
     }
 
     fun sendMsg(destId: Long, body: MessageBody): AckWindow {

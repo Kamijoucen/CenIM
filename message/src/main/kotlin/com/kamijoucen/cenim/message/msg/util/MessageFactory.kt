@@ -1,6 +1,6 @@
 package com.kamijoucen.cenim.message.msg.util
 
-import com.kamijoucen.cenim.common.util.IdGenerator
+import com.kamijoucen.cenim.common.util.idgen.IdGenerator
 import com.kamijoucen.cenim.message.msg.*
 
 class MessageFactory(private val fromId: Long) {

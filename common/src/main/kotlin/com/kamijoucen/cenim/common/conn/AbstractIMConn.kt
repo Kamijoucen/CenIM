@@ -1,6 +1,6 @@
 package com.kamijoucen.cenim.common.conn
 
-import com.kamijoucen.cenim.common.util.IdGenerator
+import com.kamijoucen.cenim.common.util.idgen.IdGenerator
 import io.netty.channel.ChannelHandlerContext
 import java.io.Serializable
 

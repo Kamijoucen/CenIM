@@ -1,13 +1,12 @@
 package com.kamijoucen.cenim.router.util
 
 import com.kamijoucen.cenim.common.util.ChCtx
-import com.kamijoucen.cenim.common.util.IdGenerator
+import com.kamijoucen.cenim.common.util.idgen.IdGenerator
 import com.kamijoucen.cenim.message.msg.Message
 import com.kamijoucen.cenim.message.msg.MessageBodyType
 import com.kamijoucen.cenim.message.msg.MessageHeader
 import com.kamijoucen.cenim.message.msg.MsgVersion
 import com.kamijoucen.cenim.message.msg.body.AckMsgBody
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
