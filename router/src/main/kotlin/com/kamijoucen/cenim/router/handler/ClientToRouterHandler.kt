@@ -31,14 +31,11 @@ class ClientToRouterHandler : SimpleChannelInboundHandler<Message>() {
         ackSender.ack(msg, ctx)
         checkFrom(msg)
         checkDest(msg)
-        // parse msg
-        val process = connContext.routerMsgProcessManager.getProcess(msg.header.bodyType)
-        if (process != null) {
-            val result = process.accept(msg, ctx)
-            if (!result.success) {
-                log.error("msg process error")
-            }
-        } else {
+        val result = connContext.routerMsgProcessManager.process[msg.header.bodyType]
+                ?.accept(msg, ctx)?.let {
+                    if (it.success) log.error("msg process error")
+                }
+        if (result == null) {
             chatService.senMsg(msg)
         }
     }

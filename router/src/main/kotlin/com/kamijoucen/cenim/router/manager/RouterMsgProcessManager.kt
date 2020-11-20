@@ -11,7 +11,7 @@ class RouterMsgProcessManager {
 
     private val log = LogFactory.getLog("RouterMsgProcessManager")
 
-    private val process = HashMap<Int, IMConsumer>()
+    public val process = HashMap<Int, IMConsumer>()
 
     init {
         MessageBodyType.values().forEach {
@@ -21,7 +21,5 @@ class RouterMsgProcessManager {
             }
         }
     }
-
-    fun getProcess(type: Int) = process[type]
 
 }

@@ -28,4 +28,7 @@ object MsgUtil {
         }
     }
 
+    fun nextMsgId(msg: Message, conn: IMConn) {
+    }
+
 }

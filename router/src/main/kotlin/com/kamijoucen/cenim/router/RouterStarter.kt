@@ -18,5 +18,7 @@ fun main(args: Array<String>) {
     var clientSuccess = startRouterClient(config)
     // 启动服务器
     val serverSuccess = startRouterServer(config)
+
     println(config)
 }
+

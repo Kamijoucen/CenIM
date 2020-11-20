@@ -9,8 +9,7 @@ import java.util.concurrent.ConcurrentHashMap
 @Component
 class ChatHistoryManager {
 
-    private val allChatHistory: ConcurrentHashMap<Long, LinkedList<Message>>
-            = ConcurrentHashMap<Long, LinkedList<Message>>()
+    private val allChatHistory: ConcurrentHashMap<Long, LinkedList<Message>> = ConcurrentHashMap<Long, LinkedList<Message>>()
 
     fun init(userId: Long) {
         allChatHistory[userId] = LinkedList<Message>()
@@ -19,11 +18,11 @@ class ChatHistoryManager {
     fun clear(userId: Long) = allChatHistory.remove(userId)
 
 
-    fun setHistory(userId: Long, msg: Message) {
-        allChatHistory[userId]?.also {
-            it.add(msg)
-        } ?: throw HistoryNotFoundException("history list not found")
-    }
+    fun setHistory(userId: Long, msg: Message) =
+            allChatHistory[userId]?.also {
+                it.add(msg)
+            } ?: throw HistoryNotFoundException("history list not found")
+
 
     fun getHistory(userId: Long) = allChatHistory[userId]!!
 

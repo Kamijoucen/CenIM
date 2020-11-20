@@ -6,6 +6,7 @@ import io.netty.buffer.ByteBuf
 
 object MessageEncoder {
 
+    // TypeMessage -> head -> content
     fun encode(msg: Message, buf: ByteBuf) {
         buf.writeInt(msg.header.version)
         buf.writeInt(msg.header.bodyType)
